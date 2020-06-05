@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 var con = mysql.createConnection({
-    host: "wwwlab.uci.umk.pl",
-    user: "291903_4whad",
-    password: "IH68JU0VR-dp",
-    database: "291903_4wh"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
   });
 
 
