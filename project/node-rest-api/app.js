@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const basicRoutes = require('./api/routes/basic');
+const userRoutes = require('./api/routes/user');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/basic', basicRoutes);
+app.use('/user', userRoutes);
 
 //error handeling
 app.use((req, res, next) => {
