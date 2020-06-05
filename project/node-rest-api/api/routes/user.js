@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 var con = mysql.createConnection({
     host: "wwwlab.uci.umk.pl",
@@ -31,7 +32,6 @@ router.post('/signup', (req, res, next) => {
                 }
                 res.status(201).json({
                     message: "pomyslnie utworzono uzytkownika ",
-                    result: hash
                 });
               });
         }
@@ -56,8 +56,17 @@ router.get('/login', (req, res, next) => {
                 }
                 if(passwdCheck)
                 {
+                    const token = jwt.sign({
+                        id: result[0].Id,
+                        login: result[0].Login
+                    }, 
+                    'eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
+                    {
+                        expiresIn: "1h"
+                    });
                     return res.status(200).json({
-                        message: "Login successful"
+                        message: "Login successful",
+                        token: token
                     });
                 }
                 return res.status(401).json({
