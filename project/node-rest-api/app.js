@@ -5,6 +5,8 @@ const app = express();
 
 const basicRoutes = require('./api/routes/basic');
 const userRoutes = require('./api/routes/user');
+const definitionsRoutes = require('./api/routes/definitions');
+const synonymsRoutes = require('./api/routes/synonyms');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -23,7 +25,9 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/basic', basicRoutes);
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
+app.use('/definitions', definitionsRoutes);
+app.use('/synonyms', synonymsRoutes);
 
 //error handeling
 app.use((req, res, next) => {

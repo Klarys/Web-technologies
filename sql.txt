@@ -1,27 +1,30 @@
 CREATE TABLE `Users`
 (
  `Id`       int NOT NULL AUTO_INCREMENT ,
- `Login`    linestring NOT NULL ,
- `Password` linestring NOT NULL ,
+ `Login`    varchar(45) NOT NULL ,
+ `Password` varchar(200) NOT NULL ,
 
 PRIMARY KEY (`Id`)
 );
 
+
 CREATE TABLE `Words`
 (
  `Id`     int NOT NULL AUTO_INCREMENT ,
- `Word`   linestring NOT NULL ,
+ `Word`   varchar(45) NOT NULL ,
  `IdUser` int NOT NULL ,
 
 PRIMARY KEY (`Id`),
-KEY `fkIdx_11` (`IdUser`),
-CONSTRAINT `FK_11` FOREIGN KEY `fkIdx_11` (`IdUser`) REFERENCES `Users` (`Id`)
+KEY `fkIdx_19` (`IdUser`),
+CONSTRAINT `FK_19` FOREIGN KEY `fkIdx_19` (`IdUser`) REFERENCES `Users` (`Id`)
 );
+
+
 
 CREATE TABLE `Synonyms`
 (
  `Id`      int NOT NULL AUTO_INCREMENT ,
- `Synonym` linestring NOT NULL ,
+ `Synonym` varchar(45) NOT NULL ,
  `IdWord`  int NOT NULL ,
 
 PRIMARY KEY (`Id`),
@@ -33,24 +36,13 @@ CONSTRAINT `FK_25` FOREIGN KEY `fkIdx_25` (`IdWord`) REFERENCES `Words` (`Id`)
 CREATE TABLE `Definitions`
 (
  `Id`         int NOT NULL AUTO_INCREMENT ,
- `Definition` multilinestring NOT NULL ,
+ `Definition` text NOT NULL ,
  `IdWord`     int NOT NULL ,
 
 PRIMARY KEY (`Id`),
 KEY `fkIdx_22` (`IdWord`),
 CONSTRAINT `FK_22` FOREIGN KEY `fkIdx_22` (`IdWord`) REFERENCES `Words` (`Id`)
 );
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -60,7 +60,7 @@ router.get('/login', (req, res, next) => {
                         id: result[0].Id,
                         login: result[0].Login
                     }, 
-                    'eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
+                    process.env.JWT_KEY,
                     {
                         expiresIn: "1h"
                     });
