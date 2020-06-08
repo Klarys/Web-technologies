@@ -8,6 +8,7 @@ const userRoutes = require('./api/routes/user');
 const definitionsRoutes = require('./api/routes/definitions');
 const synonymsRoutes = require('./api/routes/synonyms');
 
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

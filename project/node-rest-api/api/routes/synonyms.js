@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const auth = require('../authorization/check-auth');
 
 var con = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -11,7 +12,7 @@ var con = mysql.createConnection({
     database: process.env.DB_NAME
   });
 
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
   
   var token = req.headers.authorization.split(' ')[1];
   var decoded = jwt.decode(token);
@@ -28,7 +29,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
   var token = req.headers.authorization.split(' ')[1];
   var decoded = jwt.decode(token);
   const idUser = decoded.id;
@@ -87,7 +88,7 @@ router.post('/', (req, res, next) => {
   });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", auth, (req, res, next) => {
     
     var token = req.headers.authorization.split(' ')[1];
     var decoded = jwt.decode(token);
