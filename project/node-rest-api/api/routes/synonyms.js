@@ -87,5 +87,46 @@ router.post('/', (req, res, next) => {
   });
 });
 
+router.delete("/:id", (req, res, next) => {
+    
+    var token = req.headers.authorization.split(' ')[1];
+    var decoded = jwt.decode(token);
+    const idUser = decoded.id;
+
+    var sql = "SELECT Synonyms.Synonym, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Synonyms ON Synonyms.IdWord = Words.Id WHERE Synonyms.Id = " + mysql.escape(req.params.id) +" AND Words.IdUser =  " + idUser;
+    con.query(sql, (err, result) => {
+        if(err)
+        {
+            return res.status(500).json({
+                error:  "database error"
+            }); 
+        }
+        if(result.length < 1)
+        {
+            return res.status(200).json({
+                message: "Synonym deleted or nothing to delete"
+            });
+        }
+        else
+        {
+            var sqlDelete = "DELETE FROM `Synonyms` WHERE `Synonyms`.`Id` = " + mysql.escape(req.params.id)
+            con.query(sqlDelete, (errDelete, errResult) => {
+                if(err)
+                {
+                    return res.status(500).json({
+                        error:  "error while deleting the synonym"
+                    }); 
+                }
+                else
+                {
+                    return res.status(200).json({
+                        message: "synonym deleted or nothing to delete"
+                    });
+                }
+            });
+        }
+    });
+});
+
 
 module.exports = router;

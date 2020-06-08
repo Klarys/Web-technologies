@@ -30,7 +30,6 @@ router.post('/', (req, res, next) => {
     var token = req.headers.authorization.split(' ')[1];
     var decoded = jwt.decode(token);
     const idUser = decoded.id;
-    var idWord = 6;
     var sqlDefinition ="";
 
     
@@ -86,6 +85,45 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.delete("/:id", (req, res, next) => {
+    
+    var token = req.headers.authorization.split(' ')[1];
+    var decoded = jwt.decode(token);
+    const idUser = decoded.id;
 
+    var sql = "SELECT Definitions.Definition, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Definitions ON Definitions.IdWord = Words.Id WHERE Definitions.Id = " + mysql.escape(req.params.id) +" AND Words.IdUser =  " + idUser;
+    con.query(sql, (err, result) => {
+        if(err)
+        {
+            return res.status(500).json({
+                error:  "database error"
+            }); 
+        }
+        if(result.length < 1)
+        {
+            return res.status(200).json({
+                message: "definition deleted or nothing to delete"
+            });
+        }
+        else
+        {
+            var sqlDelete = "DELETE FROM `Definitions` WHERE `Definitions`.`Id` = " + mysql.escape(req.params.id)
+            con.query(sqlDelete, (errDelete, errResult) => {
+                if(err)
+                {
+                    return res.status(500).json({
+                        error:  "error while deleting the definition"
+                    }); 
+                }
+                else
+                {
+                    return res.status(200).json({
+                        message: "definition deleted or nothing to delete"
+                    });
+                }
+            });
+        }
+    });
+});
 
 module.exports = router;
