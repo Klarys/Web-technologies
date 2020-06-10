@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
@@ -32,7 +33,7 @@ const appRoutes : Routes = [
     HomeComponent,
     SavedDefinitionsComponent,
     SavedSynonymsComponent,
-    SpellcheckComponent
+    SpellcheckComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,13 +43,15 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   exports: [
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

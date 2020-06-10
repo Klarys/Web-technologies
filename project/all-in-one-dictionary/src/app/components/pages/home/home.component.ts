@@ -21,6 +21,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class HomeComponent implements OnInit {
   word: string;
   searchForm: FormGroup;
+  searched = false;
+  searchedWord: string;
+
+  resultsOxford: string[] = [];
+  resultsMerriam: string[] = [];
+  resultsWordsApi: string[] = [];
+  resultsOwl: string[] = [];
+  
+  
 
   constructor() { 
     this.searchForm = new FormGroup({
@@ -35,8 +44,16 @@ export class HomeComponent implements OnInit {
   onAccept() {
     if(this.searchForm.valid)
     {
+      this.searched = true;
+      this.searchedWord = this.searchForm.get("wordInput").value;
       //TODO: wyszukiwanie
+
+
     }
+  }
+
+  onDefinitionSave(definion: string) {
+
   }
 
 }

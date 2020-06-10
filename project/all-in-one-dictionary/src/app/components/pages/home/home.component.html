@@ -20,8 +20,14 @@
     </div>
     <div class="row">
         <mat-radio-group aria-label="Select a category" formControlName="category">
-          <mat-radio-button [checked]="true"  name="category" value="1">Definitions</mat-radio-button>
-          <mat-radio-button name="category" value="2">Synonyms</mat-radio-button>
+          <div class="row">
+            <div class="col">
+              <mat-radio-button [checked]="true"  name="category" value="1">Definitions</mat-radio-button>
+            </div>
+            <div class="col">
+              <mat-radio-button name="category" value="2">Synonyms</mat-radio-button>
+            </div>
+          </div>
           <mat-error
                   *ngIf="searchForm.get('category').hasError('required')">
                   Please select a category!
@@ -35,36 +41,109 @@
         </div>
     </div>
 </form>
-
-
-<!-- <div class="form-group">
-    <label for="wordInput">Type in a word:</label>
-    <input type="text" formControlName="wordInput" maxlength="30" class="form-control" id="wordInput" placeholder="kerfuffle">
-    <br>
+<hr/>
+<div class="row" *ngIf="searched">
+  <div class="col">
     <div class="row">
-        <div class="col">
-            <label for="wordInput">What do you want to search for?</label>
-            <div class="form-check">
-                <input matInput class="form-check-input" type="radio" name="exampleRadios" id="definitons" value="definitons" checked>
-                <mat-error *ngIf="searchForm.hasError('required')">
-                    Email is <strong>required</strong>
-                  </mat-error>
-                <label class="form-check-label" for="definitons">
-                  Definitions
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="synonyms" value="synonyms">
-                <label class="form-check-label" for="synonyms">
-                  Synonyms
-                </label>
-              </div>
+      <div class="col">
+        <h3>"{{searchedWord}}" - Oxford Dictionary results:</h3>
+        <div class="row" *ngIf="this.resultsOxford.length == 0">
+          <div class="col">
+            No results. 😞
+          </div>
         </div>
+        <div class="row" *ngFor="let definition of resultsOxford;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row">
-        <div class="col text-right">
-            <button class="btn btn-primary" type="submit">Search</button>
+      <div class="col">
+        <h3>"{{searchedWord}}" - Merriam-Webster Dictionary results:</h3>
+        <div class="row" *ngIf="this.resultsMerriam.length == 0">
+          <div class="col">
+            No results. 😞
+          </div>
         </div>
+        <div class="row" *ngFor="let definition of resultsMerriam;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    
-</div> -->
+    <div class="row">
+      <div class="col">
+        <h3>"{{searchedWord}}" - WordsAPI Dictionary results:</h3>
+        <div class="row" *ngIf="this.resultsWordsApi.length == 0">
+          <div class="col">
+            No results. 😞
+          </div>
+        </div>
+        <div class="row" *ngFor="let definition of resultsWordsApi;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>"{{searchedWord}}" - OWLBOT Dictionary results:</h3>
+        <div class="row" *ngIf="this.resultsOwl.length == 0">
+          <div class="col">
+            No results. 😞
+          </div>
+        </div>
+        <div class="row" *ngFor="let definition of resultsOwl;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
