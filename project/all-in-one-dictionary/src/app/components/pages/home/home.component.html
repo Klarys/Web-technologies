@@ -1,1 +1,70 @@
-<p>home works!</p>
+<form (ngSubmit)="onAccept()" [formGroup]="searchForm">
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="standard">
+                <mat-label
+                  >What word do you want to search for?</mat-label
+                >
+                <input
+                  matInput
+                  type="text"
+                  formControlName="wordInput"
+                  required
+                />
+                <mat-error
+                  *ngIf="searchForm.get('wordInput').hasError('required')">
+                  Please type in a word!
+                </mat-error>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <mat-radio-group aria-label="Select a category" formControlName="category">
+          <mat-radio-button [checked]="true"  name="category" value="1">Definitions</mat-radio-button>
+          <mat-radio-button name="category" value="2">Synonyms</mat-radio-button>
+          <mat-error
+                  *ngIf="searchForm.get('category').hasError('required')">
+                  Please select a category!
+                </mat-error>
+        </mat-radio-group>
+        
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+
+<!-- <div class="form-group">
+    <label for="wordInput">Type in a word:</label>
+    <input type="text" formControlName="wordInput" maxlength="30" class="form-control" id="wordInput" placeholder="kerfuffle">
+    <br>
+    <div class="row">
+        <div class="col">
+            <label for="wordInput">What do you want to search for?</label>
+            <div class="form-check">
+                <input matInput class="form-check-input" type="radio" name="exampleRadios" id="definitons" value="definitons" checked>
+                <mat-error *ngIf="searchForm.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                <label class="form-check-label" for="definitons">
+                  Definitions
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="synonyms" value="synonyms">
+                <label class="form-check-label" for="synonyms">
+                  Synonyms
+                </label>
+              </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+    
+</div> -->

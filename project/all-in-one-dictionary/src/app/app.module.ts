@@ -10,6 +10,11 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { SavedDefinitionsComponent } from './components/pages/saved-definitions/saved-definitions.component';
 import { SavedSynonymsComponent } from './components/pages/saved-synonyms/saved-synonyms.component';
 import { SpellcheckComponent } from './components/pages/spellcheck/spellcheck.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
@@ -31,7 +36,19 @@ const appRoutes : Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule
+  ],
+  exports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
