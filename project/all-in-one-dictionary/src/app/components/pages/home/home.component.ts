@@ -6,6 +6,7 @@ import { DictionariesService } from 'src/app/services/dictionaries.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { WordsApiDefinition } from 'src/app/models/WordsApiDefinition.model';
 import { element } from 'protractor';
+import { LinguaDefinitions } from 'src/app/models/LinguaDefinition.module';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -28,12 +29,12 @@ export class HomeComponent implements OnInit {
   searchedWord: string;
   category: number =-1;
 
-  definitionsOxford: string[] = [];
+  definitionsLingua: string[] = [];
   definitionsMerriam: string[] = [];
   definitionsWordsApi: string[] = [];
   definitionsOwl: string[] = [];
 
-  synonymsOxford: string[] = [];
+  synonymsLingua: string[] = [];
   synonymsMerriam: string[] = [];
   synonymsWordsApi: string[] = [];
   synonymsOwl: string[] = [];
@@ -57,12 +58,12 @@ export class HomeComponent implements OnInit {
       this.searchedWord = this.searchForm.get("wordInput").value;
       this.category = this.searchForm.get('category').value;
 
-      this.definitionsOxford = [];
+      this.definitionsLingua = [];
       this.definitionsMerriam = [];
       this.definitionsWordsApi = [];
       this.definitionsOwl = [];
 
-      this.synonymsOxford = [];
+      this.synonymsLingua = [];
       this.synonymsMerriam = [];
       this.synonymsWordsApi = [];
       this.synonymsOwl = [];
@@ -77,15 +78,27 @@ export class HomeComponent implements OnInit {
         (data: HttpErrorResponse) => {console.log('error!')},
       );
 
+      this.dictionariesSerice.GetLinguaDefinitions(this.searchedWord).subscribe(
+        (data: LinguaDefinitions) => {
+          data.entries[0].lexemes[0].senses.forEach(element => {
+            this.definitionsLingua.push(element.definition);
+          })
+        },
+        (data: HttpErrorResponse) => {console.log('error!')},
+      );
+
+      
+      console.log(this.definitionsLingua);
       console.log(this.definitionsWordsApi);
+
       if(this.searchForm.get('category').value == 1)
       {
-        this.definitionsOxford.push("def");
+        this.definitionsLingua.push("def");
         
       }
       if(this.searchForm.get('category').value == 2)
       {
-        this.synonymsOxford.push("syn");
+        this.synonymsLingua.push("syn");
       }
     }
   }

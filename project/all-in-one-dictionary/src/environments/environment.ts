@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  WordApiUrl: "https://wordsapiv1.p.rapidapi.com/words/"
+  WordApiUrl: "https://wordsapiv1.p.rapidapi.com/words/",
+  LanguaUrl: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/"
 };
 
 /*

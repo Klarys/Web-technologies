@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators'
 import { WordsApiDefinition } from '../models/WordsApiDefinition.model';
 import { Observable } from 'rxjs';
+import { LinguaDefinitions } from '../models/LinguaDefinition.module';
 
 @Injectable({providedIn: 'root'})
 export class DictionariesService {
@@ -15,6 +16,16 @@ export class DictionariesService {
         {
             headers: new HttpHeaders({
                 'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+                'x-rapidapi-key': '0440ffb3b5msh31f194ee363852fp13e7bdjsndeacfeb78db4'
+            })
+        });
+    }
+
+    GetLinguaDefinitions(word: string): Observable<LinguaDefinitions> {
+        return this.http.get<LinguaDefinitions>(environment.LanguaUrl + word,
+        {
+            headers: new HttpHeaders({
+                'x-rapidapi-host': 'lingua-robot.p.rapidapi.com',
                 'x-rapidapi-key': '0440ffb3b5msh31f194ee363852fp13e7bdjsndeacfeb78db4'
             })
         });
