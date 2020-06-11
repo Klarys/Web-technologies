@@ -23,11 +23,17 @@ export class HomeComponent implements OnInit {
   searchForm: FormGroup;
   searched = false;
   searchedWord: string;
+  category: number =-1;
 
-  resultsOxford: string[] = [];
-  resultsMerriam: string[] = [];
-  resultsWordsApi: string[] = [];
-  resultsOwl: string[] = [];
+  definitionsOxford: string[] = [];
+  definitionsMerriam: string[] = [];
+  definitionsWordsApi: string[] = [];
+  definitionsOwl: string[] = [];
+
+  synonymsOxford: string[] = [];
+  synonymsMerriam: string[] = [];
+  synonymsWordsApi: string[] = [];
+  synonymsOwl: string[] = [];
   
   
 
@@ -46,13 +52,35 @@ export class HomeComponent implements OnInit {
     {
       this.searched = true;
       this.searchedWord = this.searchForm.get("wordInput").value;
+      this.category = this.searchForm.get('category').value;
+
+      this.definitionsOxford = [];
+      this.definitionsMerriam = [];
+      this.definitionsWordsApi = [];
+      this.definitionsOwl = [];
+
+      this.synonymsOxford = [];
+      this.synonymsMerriam = [];
+      this.synonymsWordsApi = [];
+      this.synonymsOwl = [];
       //TODO: wyszukiwanie
-
-
+      if(this.searchForm.get('category').value == 1)
+      {
+        this.definitionsOxford.push("def");
+        
+      }
+      if(this.searchForm.get('category').value == 2)
+      {
+        this.synonymsOxford.push("syn");
+      }
     }
   }
 
   onDefinitionSave(definion: string) {
+
+  }
+
+  onSynonymSave(synonym: string) {
 
   }
 

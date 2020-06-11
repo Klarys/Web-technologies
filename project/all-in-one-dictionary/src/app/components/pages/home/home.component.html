@@ -47,12 +47,12 @@
     <div class="row">
       <div class="col">
         <h3>"{{searchedWord}}" - Oxford Dictionary results:</h3>
-        <div class="row" *ngIf="this.resultsOxford.length == 0">
+        <div class="row" *ngIf="(this.category == 1 && this.definitionsOxford.length == 0) || (this.category == 2 && this.synonymsOxford.length == 0)">
           <div class="col">
             No results. 😞
           </div>
         </div>
-        <div class="row" *ngFor="let definition of resultsOxford;let i=index">
+        <div class="row" *ngFor="let definition of definitionsOxford;let i=index">
           <div class="col">
            {{i+1}}. {{definition}}
           </div>
@@ -62,6 +62,21 @@
               class="btn"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let synonym of synonymsOxford;let i=index">
+          <div class="col">
+           {{i+1}}. {{synonym}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onSynonymSave(synonym)"
             >
               <mat-icon>bookmark</mat-icon>
             </button>
@@ -72,12 +87,12 @@
     <div class="row">
       <div class="col">
         <h3>"{{searchedWord}}" - Merriam-Webster Dictionary results:</h3>
-        <div class="row" *ngIf="this.resultsMerriam.length == 0">
+        <div class="row" *ngIf="(this.category == 1 && this.definitionsMerriam.length == 0) || (this.category == 2 && this.synonymsMerriam.length == 0)">
           <div class="col">
             No results. 😞
           </div>
         </div>
-        <div class="row" *ngFor="let definition of resultsMerriam;let i=index">
+        <div class="row" *ngFor="let definition of definitionsMerriam;let i=index">
           <div class="col">
            {{i+1}}. {{definition}}
           </div>
@@ -87,6 +102,21 @@
               class="btn"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let synonym of synonymsMerriam;let i=index">
+          <div class="col">
+           {{i+1}}. {{synonym}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onSynonymSave(synonym)"
             >
               <mat-icon>bookmark</mat-icon>
             </button>
@@ -97,51 +127,11 @@
     <div class="row">
       <div class="col">
         <h3>"{{searchedWord}}" - WordsAPI Dictionary results:</h3>
-        <div class="row" *ngIf="this.resultsWordsApi.length == 0">
-          <div class="col">
-            No results. 😞
-          </div>
-        </div>
-        <div class="row" *ngFor="let definition of resultsWordsApi;let i=index">
-          <div class="col">
-           {{i+1}}. {{definition}}
-          </div>
-          <div class="col-lg-2">
-            <button
-              type="button"
-              class="btn"
-              mat-icon-button
-              (click)="onDefinitionSave(definition)"
-            >
-              <mat-icon>bookmark</mat-icon>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <h3>"{{searchedWord}}" - OWLBOT Dictionary results:</h3>
-        <div class="row" *ngIf="this.resultsOwl.length == 0">
-          <div class="col">
-            No results. 😞
-          </div>
-        </div>
-        <div class="row" *ngFor="let definition of resultsOwl;let i=index">
-          <div class="col">
-           {{i+1}}. {{definition}}
-          </div>
-          <div class="col-lg-2">
-            <button
-              type="button"
-              class="btn"
-              mat-icon-button
-              (click)="onDefinitionSave(definition)"
-            >
-              <mat-icon>bookmark</mat-icon>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
