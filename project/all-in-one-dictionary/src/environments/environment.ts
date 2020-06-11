@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   WordApiUrl: "https://wordsapiv1.p.rapidapi.com/words/",
-  LanguaUrl: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/"
+  LinguaUrl: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/",
+  MerriamUrl: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/",
+  OwlUrl: "https://owlbot.info/api/v4/dictionary/"
 };
 
 /*

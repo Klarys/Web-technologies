@@ -5,8 +5,12 @@ import { MatRadioButton } from '@angular/material/radio';
 import { DictionariesService } from 'src/app/services/dictionaries.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { WordsApiDefinition } from 'src/app/models/WordsApiDefinition.model';
-import { element } from 'protractor';
+import { element, ElementFinder } from 'protractor';
 import { LinguaDefinitions } from 'src/app/models/LinguaDefinition.module';
+import { MerriamDefinitions, MerriamDt } from 'src/app/models/MerriamDefinitions.model';
+import { OwlDefinitions } from 'src/app/models/OwlDefinitions.model';
+import { WordsApiSynonyms } from 'src/app/models/WordsApiSynonyms.model';
+import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.module';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -41,7 +45,7 @@ export class HomeComponent implements OnInit {
   
   
 
-  constructor(private dictionariesSerice: DictionariesService) { 
+  constructor(private dictionariesService: DictionariesService) { 
     this.searchForm = new FormGroup({
       wordInput: new FormControl(null, [Validators.required]),
       category: new FormControl(1, [Validators.required])
@@ -51,54 +55,100 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAccept() {
+  onAccept() { //TODO - OBSLUGA BLEDOW PRZY LOSOWYM CIAGU ZNAKOW (NIEISTNIEJACE SŁOWO)
     if(this.searchForm.valid)
     {
       this.searched = true;
       this.searchedWord = this.searchForm.get("wordInput").value;
       this.category = this.searchForm.get('category').value;
 
-      this.definitionsLingua = [];
-      this.definitionsMerriam = [];
-      this.definitionsWordsApi = [];
-      this.definitionsOwl = [];
-
-      this.synonymsLingua = [];
-      this.synonymsMerriam = [];
-      this.synonymsWordsApi = [];
-      this.synonymsOwl = [];
-      //TODO: wyszukiwanie
-
-      this.dictionariesSerice.GetWordsAPIDefinitions(this.searchedWord).subscribe(
-        (data: WordsApiDefinition) => {
-          data.definitions.forEach(element => {
-            this.definitionsWordsApi.push(element.definition);
-          })
-        },
-        (data: HttpErrorResponse) => {console.log('error!')},
-      );
-
-      this.dictionariesSerice.GetLinguaDefinitions(this.searchedWord).subscribe(
-        (data: LinguaDefinitions) => {
-          data.entries[0].lexemes[0].senses.forEach(element => {
-            this.definitionsLingua.push(element.definition);
-          })
-        },
-        (data: HttpErrorResponse) => {console.log('error!')},
-      );
-
+      this.clearAll();
       
-      console.log(this.definitionsLingua);
-      console.log(this.definitionsWordsApi);
-
-      if(this.searchForm.get('category').value == 1)
+      //TODO: wyszukiwanie
+      if(this.category == 1) //wyszukiwanie definicji
       {
-        this.definitionsLingua.push("def");
+        this.dictionariesService.GetWordsAPIDefinitions(this.searchedWord).subscribe(
+          (data: WordsApiDefinition) => {
+            data.definitions.forEach(element => {
+              this.definitionsWordsApi.push(element.definition);
+            })
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        );
+  
+        this.dictionariesService.GetLinguaDefinitions(this.searchedWord).subscribe(
+          (data: LinguaDefinitions) => {
+            data.entries[0].lexemes[0].senses.forEach(element => {
+              this.definitionsLingua.push(element.definition);
+            })
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        );
+  
+  
+        this.dictionariesService.getMerriamDefinitions(this.searchedWord).subscribe(
+          (data: MerriamDefinitions[]) => {
+            //console.log(data);
+            data.forEach(data =>
+              {
+                data.def.forEach(def => {
+                  def.sseq.forEach(sseq => {
+                    
+                    // if(sseq[0] == "sense") {
+                    //   console.log(sseq[0]);
+                    //   let element : MerriamDt = JSON.parse(sseq[1]);
+                    //   console.log(element);
+                    // }
+                  })
+                })
+              })
+          
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        );
         
+        this.dictionariesService.getOwlDefinitions(this.searchedWord).subscribe(
+          (data: OwlDefinitions) => {
+            data.definitions.forEach(element => {
+              this.definitionsOwl.push(element.definition);
+            })
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        )
+  
+        console.log(this.definitionsLingua);
+        console.log(this.definitionsWordsApi);
+        console.log(this.definitionsOwl);
       }
-      if(this.searchForm.get('category').value == 2)
-      {
-        this.synonymsLingua.push("syn");
+      else if(this.category == 2) { //wyszukiwanie synonimów
+
+        this.dictionariesService.getWordsAPISynonyms(this.searchedWord).subscribe(
+          (data: WordsApiSynonyms) => {
+            
+            data.synonyms.forEach(element => {
+              this.synonymsWordsApi.push(element);
+            })
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        )
+        
+        this.dictionariesService.GetLinguaSynonyms(this.searchedWord).subscribe(
+          (data: LinguaSynonyms) => {
+            data.entries[0].lexemes[0].synonymSets.forEach(element => {
+              if(element.synonyms)
+              {
+                element.synonyms.forEach(synonym => {
+                  this.synonymsLingua.push(synonym.toString());
+                });
+              }
+              
+            });
+          },
+          (data: HttpErrorResponse) => {console.log('error!')}
+        );
+
+        console.log(this.synonymsWordsApi);
+        console.log(this.synonymsLingua);
       }
     }
   }
@@ -109,6 +159,18 @@ export class HomeComponent implements OnInit {
 
   onSynonymSave(synonym: string) {
 
+  }
+
+  clearAll() {
+    this.definitionsLingua = [];
+    this.definitionsMerriam = [];
+    this.definitionsWordsApi = [];
+    this.definitionsOwl = [];
+
+    this.synonymsLingua = [];
+    this.synonymsMerriam = [];
+    this.synonymsWordsApi = [];
+    this.synonymsOwl = [];
   }
 
 }

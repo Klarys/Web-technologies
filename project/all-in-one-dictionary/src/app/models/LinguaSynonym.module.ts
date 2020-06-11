@@ -1,11 +1,11 @@
-export class LinguaDefinitions
+export class LinguaSynonyms
 {
     entries:[
     {
         entry: string,
         lexemes:[{
-            senses:[{
-                definition: string;
+            synonymSets:[{
+                synonyms: string[];
             }];
          }];
     }];

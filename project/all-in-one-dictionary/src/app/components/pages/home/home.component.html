@@ -127,11 +127,66 @@
     <div class="row">
       <div class="col">
         <h3>"{{searchedWord}}" - WordsAPI Dictionary results:</h3>
+        <div class="row" *ngIf="(this.category == 1 && this.definitionsWordsApi.length == 0) || (this.category == 2 && this.synonymsWordsApi.length == 0)">
+          <div class="col">
+            No results. 😞
+          </div>
+        </div>
+        <div class="row" *ngFor="let definition of definitionsWordsApi;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let synonym of synonymsWordsApi;let i=index">
+          <div class="col">
+           {{i+1}}. {{synonym}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onSynonymSave(synonym)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="this.category == 1">
       <div class="col">
         <h3>"{{searchedWord}}" - OWLBOT Dictionary results:</h3>
+        <div class="row" *ngIf="this.definitionsOwl.length == 0">
+          <div class="col">
+            No results. 😞
+          </div>
+        </div>
+        <div class="row" *ngFor="let definition of definitionsOwl;let i=index">
+          <div class="col">
+           {{i+1}}. {{definition}}
+          </div>
+          <div class="col-lg-2">
+            <button
+              type="button"
+              class="btn"
+              mat-icon-button
+              (click)="onDefinitionSave(definition)"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
