@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { MatRadioButton } from '@angular/material/radio';
+import { DictionariesService } from 'src/app/services/dictionaries.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { WordsApiDefinition } from 'src/app/models/WordsApiDefinition.model';
+import { element } from 'protractor';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -10,8 +15,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
-
 
 @Component({
   selector: 'app-home',
@@ -37,7 +40,7 @@ export class HomeComponent implements OnInit {
   
   
 
-  constructor() { 
+  constructor(private dictionariesSerice: DictionariesService) { 
     this.searchForm = new FormGroup({
       wordInput: new FormControl(null, [Validators.required]),
       category: new FormControl(1, [Validators.required])
@@ -64,6 +67,17 @@ export class HomeComponent implements OnInit {
       this.synonymsWordsApi = [];
       this.synonymsOwl = [];
       //TODO: wyszukiwanie
+
+      this.dictionariesSerice.GetWordsAPIDefinitions(this.searchedWord).subscribe(
+        (data: WordsApiDefinition) => {
+          data.definitions.forEach(element => {
+            this.definitionsWordsApi.push(element.definition);
+          })
+        },
+        (data: HttpErrorResponse) => {console.log('error!')},
+      );
+
+      console.log(this.definitionsWordsApi);
       if(this.searchForm.get('category').value == 1)
       {
         this.definitionsOxford.push("def");
