@@ -16,14 +16,14 @@ router.get('/', auth, (req, res, next) => {
     var decoded = jwt.decode(token);
     const idUser = decoded.id;
 
-    var sql = "SELECT Definitions.Definition, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Definitions ON Definitions.IdWord = Words.Id WHERE Definitions.IdWord = Words.Id AND Words.IdUser =  " + idUser;
+    var sql = "SELECT Definitions.Definition, Definitions.Id, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Definitions ON Definitions.IdWord = Words.Id WHERE Definitions.IdWord = Words.Id AND Words.IdUser =  " + idUser;
     con.query(sql, function (err, result) {
         if (err) {
             return res.status(500);
         }
-        res.status(200).json({
-            definitions: result,
-        });
+        res.status(200).json(
+            result
+        );
       });
 });
 

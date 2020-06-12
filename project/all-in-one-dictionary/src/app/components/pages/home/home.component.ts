@@ -12,6 +12,7 @@ import { OwlDefinitions } from 'src/app/models/OwlDefinitions.model';
 import { WordsApiSynonyms } from 'src/app/models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.model';
 import { TwinwordSynonyms } from 'src/app/models/TwinwordSynonyms.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -28,6 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  logedIn=false;
   word: string;
   searchForm: FormGroup;
   searched = false;
@@ -46,11 +48,12 @@ export class HomeComponent implements OnInit {
   
   
 
-  constructor(private dictionariesService: DictionariesService) { 
+  constructor(private dictionariesService: DictionariesService, private authService: AuthService) { 
     this.searchForm = new FormGroup({
       wordInput: new FormControl(null, [Validators.required]),
       category: new FormControl(1, [Validators.required])
     });
+    this.logedIn = authService.isLogedIn();
   }
 
   ngOnInit(): void {
@@ -202,7 +205,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDefinitionSave(definion: string) {
-
+    
   }
 
   onSynonymSave(synonym: string) {

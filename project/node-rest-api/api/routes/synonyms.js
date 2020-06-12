@@ -18,14 +18,12 @@ router.get('/', auth, (req, res, next) => {
   var decoded = jwt.decode(token);
   const idUser = decoded.id;
   
-  var sql = "SELECT Synonyms.Synonym, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Synonyms ON Synonyms.IdWord = Words.Id WHERE Synonyms.IdWord = Words.Id AND Words.IdUser =  " + idUser;
+  var sql = "SELECT Synonyms.Synonym, Synonyms.Id, Words.Word FROM Users JOIN Words ON Users.Id = Words.IdUser JOIN Synonyms ON Synonyms.IdWord = Words.Id WHERE Synonyms.IdWord = Words.Id AND Words.IdUser =  " + idUser;
   con.query(sql, function (err, result) {
       if (err) {
           return res.status(500);
       }
-      res.status(200).json({
-          synonyms: result,
-      });
+      res.status(200).json(result);
     });
 });
 

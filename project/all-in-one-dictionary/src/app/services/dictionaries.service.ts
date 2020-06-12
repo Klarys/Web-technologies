@@ -10,6 +10,7 @@ import { OwlDefinitions } from '../models/OwlDefinitions.model';
 import { WordsApiSynonyms } from '../models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from '../models/LinguaSynonym.model';
 import { TwinwordSynonyms } from '../models/TwinwordSynonyms.model';
+import { SavedDefinition } from '../models/saved/SavedDefinition.model';
 
 @Injectable({providedIn: 'root'})
 export class DictionariesService {
@@ -90,5 +91,19 @@ export class DictionariesService {
         });
     }
 
-    GetSavedDefinition(): Observable<
+    GetSavedDefinitions(): Observable<SavedDefinition[]> {
+        return this.http.get<SavedDefinition[]>(environment.NodeJSUrl + "definitions", {
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
+    }
+
+    SaveDefinition(word: string, definition: string) {
+        const body = {
+            word: word,
+            definition: definition
+        };
+        return this.http.post(environment.NodeJSUrl + "definitions", body);
+    }
 }
