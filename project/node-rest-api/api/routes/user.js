@@ -38,7 +38,7 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
-router.get('/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
 
     con.query('SELECT * FROM `Users` WHERE `Login` = '+mysql.escape(req.body.login), function(err, result) {
         if (err) {
@@ -75,7 +75,6 @@ router.get('/login', (req, res, next) => {
             });
         }
     });
-
 });
 
 module.exports = router;
