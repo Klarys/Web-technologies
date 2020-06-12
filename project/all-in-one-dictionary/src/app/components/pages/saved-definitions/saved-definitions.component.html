@@ -1,1 +1,7 @@
-<p>saved-definitions works!</p>
+<p *ngIf='logedIn'>saved-definitions works!</p>
+<div class="row" *ngIf='!logedIn'>
+    <div class="col">
+        <h3>This feature is available only for signed-in users. You can log in <a class="link" routerLink="/auth">here</a></h3>
+    </div>
+</div>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-saved-definitions',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./saved-definitions.component.css']
 })
 export class SavedDefinitionsComponent implements OnInit {
+  logedIn=false;
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+    console.log(authService.isLogedIn())
+    this.logedIn = authService.isLogedIn();
+   }
 
   ngOnInit(): void {
   }

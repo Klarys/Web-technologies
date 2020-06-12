@@ -12,17 +12,28 @@ export class AuthService {
 
     Login(email: string, password: string): Observable<AuthResponse> {
         const body = {
-            email,
-            password,
-          };
+          login: email,
+          password: password,
+        };
         return this.http.post<AuthResponse>(environment.NodeJSUrl + "users/login", body);
     }
 
     Signup(email: string, password: string): Observable<AuthResponse> {
         const body = {
-            email,
-            password,
+            login: email,
+            password: password,
           };
         return this.http.post<AuthResponse>(environment.NodeJSUrl + "users/signup", body);
+    }
+
+    isLogedIn() {
+      if(localStorage)
+      {
+        if(localStorage.getItem('token'))
+        {
+          return true;
+        }
+      }
+      return false;
     }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  NodeJSUrl: "localhost:3000/",
+  NodeJSUrl: "http://localhost:3000/",
   WordApiUrl: "https://wordsapiv1.p.rapidapi.com/words/",
   LinguaUrl: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/",
   TwinwordUrl: "https://twinword-word-graph-dictionary.p.rapidapi.com/",
