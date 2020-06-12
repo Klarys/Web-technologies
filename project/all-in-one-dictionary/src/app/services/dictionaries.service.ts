@@ -5,10 +5,11 @@ import { map } from 'rxjs/operators'
 import { WordsApiDefinition } from '../models/WordsApiDefinition.model';
 import { Observable } from 'rxjs';
 import { LinguaDefinitions } from '../models/LinguaDefinition.module';
-import { MerriamDt, MerriamDefinitions } from '../models/MerriamDefinitions.model';
+import { TwinwordDefinitions } from '../models/TwinwordDefinitions.model';
 import { OwlDefinitions } from '../models/OwlDefinitions.model';
 import { WordsApiSynonyms } from '../models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from '../models/LinguaSynonym.module';
+import { TwinwordSynonyms } from '../models/TwinwordSynonyms.model';
 
 @Injectable({providedIn: 'root'})
 export class DictionariesService {
@@ -35,11 +36,15 @@ export class DictionariesService {
         });
     }
 
-    getMerriamDefinitions(word: string): Observable<MerriamDefinitions[]> {
-        return this.http.get<MerriamDefinitions[]>(environment.MerriamUrl + word,
+    getTwinwordDefinitions(word: string): Observable<TwinwordDefinitions> {
+        return this.http.get<TwinwordDefinitions>(environment.TwinwordUrl + "definition/",
         {
+            headers: new HttpHeaders({
+                'x-rapidapi-host': 'twinword-word-graph-dictionary.p.rapidapi.com',
+                'x-rapidapi-key': '0440ffb3b5msh31f194ee363852fp13e7bdjsndeacfeb78db4'
+            }),
             params: {
-                'key': 'd4b560a3-5157-49a5-b64f-b5e6ddb4e05a'
+                'entry': word.toString()
             }
         });
     }
@@ -69,6 +74,19 @@ export class DictionariesService {
                 'x-rapidapi-host': 'lingua-robot.p.rapidapi.com',
                 'x-rapidapi-key': '0440ffb3b5msh31f194ee363852fp13e7bdjsndeacfeb78db4'
             })
+        });
+    }
+
+    GetTwinwordSynonyms(word: string): Observable<TwinwordSynonyms> {
+        return this.http.get<TwinwordSynonyms>(environment.TwinwordUrl + "reference/",
+        {
+            headers: new HttpHeaders({
+                'x-rapidapi-host': 'twinword-word-graph-dictionary.p.rapidapi.com',
+                'x-rapidapi-key': '0440ffb3b5msh31f194ee363852fp13e7bdjsndeacfeb78db4'
+            }),
+            params: {
+                'entry': word.toString()
+            }
         });
     }
 }

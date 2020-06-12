@@ -86,13 +86,13 @@
     </div>
     <div class="row">
       <div class="col">
-        <h3>"{{searchedWord}}" - Merriam-Webster Dictionary results:</h3>
-        <div class="row" *ngIf="(this.category == 1 && this.definitionsMerriam.length == 0) || (this.category == 2 && this.synonymsMerriam.length == 0)">
+        <h3>"{{searchedWord}}" - twinword Dictionary results:</h3>
+        <div class="row" *ngIf="(this.category == 1 && this.definitionsTwinword.length == 0) || (this.category == 2 && this.synonymsTwinword.length == 0)">
           <div class="col">
             No results. 😞
           </div>
         </div>
-        <div class="row" *ngFor="let definition of definitionsMerriam;let i=index">
+        <div class="row" *ngFor="let definition of definitionsTwinword;let i=index">
           <div class="col">
            {{i+1}}. {{definition}}
           </div>
@@ -107,7 +107,7 @@
             </button>
           </div>
         </div>
-        <div class="row" *ngFor="let synonym of synonymsMerriam;let i=index">
+        <div class="row" *ngFor="let synonym of synonymsTwinword;let i=index">
           <div class="col">
            {{i+1}}. {{synonym}}
           </div>

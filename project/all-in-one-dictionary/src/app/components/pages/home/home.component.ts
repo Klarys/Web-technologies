@@ -7,10 +7,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { WordsApiDefinition } from 'src/app/models/WordsApiDefinition.model';
 import { element, ElementFinder } from 'protractor';
 import { LinguaDefinitions } from 'src/app/models/LinguaDefinition.module';
-import { MerriamDefinitions, MerriamDt } from 'src/app/models/MerriamDefinitions.model';
+import { TwinwordDefinitions } from 'src/app/models/TwinwordDefinitions.model';
 import { OwlDefinitions } from 'src/app/models/OwlDefinitions.model';
 import { WordsApiSynonyms } from 'src/app/models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.module';
+import { TwinwordSynonyms } from 'src/app/models/TwinwordSynonyms.model';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -34,12 +35,12 @@ export class HomeComponent implements OnInit {
   category: number =-1;
 
   definitionsLingua: string[] = [];
-  definitionsMerriam: string[] = [];
+  definitionsTwinword: string[] = [];
   definitionsWordsApi: string[] = [];
   definitionsOwl: string[] = [];
 
   synonymsLingua: string[] = [];
-  synonymsMerriam: string[] = [];
+  synonymsTwinword: string[] = [];
   synonymsWordsApi: string[] = [];
   synonymsOwl: string[] = [];
   
@@ -64,7 +65,6 @@ export class HomeComponent implements OnInit {
 
       this.clearAll();
       
-      //TODO: wyszukiwanie
       if(this.category == 1) //wyszukiwanie definicji
       {
         this.dictionariesService.GetWordsAPIDefinitions(this.searchedWord).subscribe(
@@ -80,32 +80,57 @@ export class HomeComponent implements OnInit {
           (data: LinguaDefinitions) => {
             if(data.entries.length > 0)
             {
-              data.entries[0].lexemes[0].senses.forEach(element => {
-                this.definitionsLingua.push(element.definition);
+              data.entries[0].lexemes.forEach(lex => {
+                if(lex.senses !== undefined)
+                {
+                  lex.senses.forEach(element => {
+                    this.definitionsLingua.push(element.definition);
+                  })
+                }
               })
+              
             }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         );
   
   
-        this.dictionariesService.getMerriamDefinitions(this.searchedWord).subscribe(
-          (data: MerriamDefinitions[]) => {
-            //console.log(data);
-            data.forEach(data =>
-              {
-                data.def.forEach(def => {
-                  def.sseq.forEach(sseq => {
-                    
-                    // if(sseq[0] == "sense") {
-                    //   console.log(sseq[0]);
-                    //   let element : MerriamDt = JSON.parse(sseq[1]);
-                    //   console.log(element);
-                    // }
-                  })
-                })
+        this.dictionariesService.getTwinwordDefinitions(this.searchedWord).subscribe(
+          (data: TwinwordDefinitions) => {
+            console.log(data);
+            if(data.meaning.adjective != "")
+            {
+              
+              var splitted = data.meaning.adjective.split("(adj)",1000);
+              splitted.shift();
+              splitted.forEach(element => {
+                this.definitionsTwinword.push(element);
               })
-          
+            }
+            if(data.meaning.adverb != "")
+            {
+              var splitted = data.meaning.adverb.split("(adv)",1000);
+              splitted.shift();
+              splitted.forEach(element => {
+                this.definitionsTwinword.push(element);
+              })
+            }
+            if(data.meaning.noun != "")
+            {
+              var splitted = data.meaning.noun.split("(nou)",1000);
+              splitted.shift();
+              splitted.forEach(element => {
+                this.definitionsTwinword.push(element);
+              })
+            }
+            if(data.meaning.verb != "")
+            {
+              var splitted = data.meaning.verb.split("(vrb)",1000);
+              splitted.shift();
+              splitted.forEach(element => {
+                this.definitionsTwinword.push(element);
+              })
+            }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         );
@@ -139,19 +164,36 @@ export class HomeComponent implements OnInit {
           (data: LinguaSynonyms) => {
             if(data.entries.length > 0)
             {
-              data.entries[0].lexemes[0].synonymSets.forEach(element => {
-                if(element.synonyms)
+              data.entries[0].lexemes.forEach(lex => {
+                if(lex.synonymSets!== undefined)
                 {
-                  element.synonyms.forEach(synonym => {
-                    this.synonymsLingua.push(synonym.toString());
+                  lex.synonymSets.forEach(element => {
+                    if(element.synonyms)
+                    {
+                      element.synonyms.forEach(synonym => {
+                        this.synonymsLingua.push(synonym.toString());
+                      });
+                    }
                   });
                 }
-                
               });
             }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         );
+
+        this.dictionariesService.GetTwinwordSynonyms(this.searchedWord).subscribe( 
+          (data: TwinwordSynonyms) => {
+
+            if(data.relation.synonyms != "")
+            {
+              var splitted = data.relation.synonyms.split(", ",1000);
+              splitted.forEach(element => {
+                this.synonymsTwinword.push(element);
+              })
+            }
+          }
+        )
 
         console.log(this.synonymsWordsApi);
         console.log(this.synonymsLingua);
@@ -169,12 +211,12 @@ export class HomeComponent implements OnInit {
 
   clearAll() {
     this.definitionsLingua = [];
-    this.definitionsMerriam = [];
+    this.definitionsTwinword = [];
     this.definitionsWordsApi = [];
     this.definitionsOwl = [];
 
     this.synonymsLingua = [];
-    this.synonymsMerriam = [];
+    this.synonymsTwinword = [];
     this.synonymsWordsApi = [];
     this.synonymsOwl = [];
   }
