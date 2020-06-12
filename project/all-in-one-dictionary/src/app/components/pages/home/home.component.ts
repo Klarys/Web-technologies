@@ -78,9 +78,12 @@ export class HomeComponent implements OnInit {
   
         this.dictionariesService.GetLinguaDefinitions(this.searchedWord).subscribe(
           (data: LinguaDefinitions) => {
-            data.entries[0].lexemes[0].senses.forEach(element => {
-              this.definitionsLingua.push(element.definition);
-            })
+            if(data.entries.length > 0)
+            {
+              data.entries[0].lexemes[0].senses.forEach(element => {
+                this.definitionsLingua.push(element.definition);
+              })
+            }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         );
@@ -134,15 +137,18 @@ export class HomeComponent implements OnInit {
         
         this.dictionariesService.GetLinguaSynonyms(this.searchedWord).subscribe(
           (data: LinguaSynonyms) => {
-            data.entries[0].lexemes[0].synonymSets.forEach(element => {
-              if(element.synonyms)
-              {
-                element.synonyms.forEach(synonym => {
-                  this.synonymsLingua.push(synonym.toString());
-                });
-              }
-              
-            });
+            if(data.entries.length > 0)
+            {
+              data.entries[0].lexemes[0].synonymSets.forEach(element => {
+                if(element.synonyms)
+                {
+                  element.synonyms.forEach(synonym => {
+                    this.synonymsLingua.push(synonym.toString());
+                  });
+                }
+                
+              });
+            }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         );
