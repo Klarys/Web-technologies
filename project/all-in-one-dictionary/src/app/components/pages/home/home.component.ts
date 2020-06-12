@@ -6,11 +6,11 @@ import { DictionariesService } from 'src/app/services/dictionaries.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { WordsApiDefinition } from 'src/app/models/WordsApiDefinition.model';
 import { element, ElementFinder } from 'protractor';
-import { LinguaDefinitions } from 'src/app/models/LinguaDefinition.module';
+import { LinguaDefinitions } from 'src/app/models/LinguaDefinition.model';
 import { TwinwordDefinitions } from 'src/app/models/TwinwordDefinitions.model';
 import { OwlDefinitions } from 'src/app/models/OwlDefinitions.model';
 import { WordsApiSynonyms } from 'src/app/models/WordsApiSynonyms.model';
-import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.module';
+import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.model';
 import { TwinwordSynonyms } from 'src/app/models/TwinwordSynonyms.model';
 
 
