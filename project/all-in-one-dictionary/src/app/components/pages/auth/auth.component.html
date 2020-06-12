@@ -1,0 +1,52 @@
+
+<form (ngSubmit)="onAccept()" [formGroup]="authForm">
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="standard">
+                <mat-label
+                  >login@mail.com</mat-label
+                >
+                <input
+                  matInput
+                  type="email"
+                  formControlName="emailInput"
+                  required
+                />
+                <mat-error
+                  *ngIf="authForm.get('emailInput').hasError('required')">
+                  Please type in a valid email!
+                </mat-error>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="standard">
+                <mat-label
+                  >Password</mat-label
+                >
+                <input
+                  matInput
+                  type="password"
+                  formControlName="passwordInput"
+                  required
+                />
+                <mat-error
+                  *ngIf="authForm.get('passwordInput').hasError('required')">
+                  Please type in a valid password!
+                </mat-error>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <button class="btn btn-primary" type="submit">{{loginMode ? 'Login' : 'Register'}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-left">
+            {{loginMode ? 'Not register yet?' : 'Already registered?'}}
+            <button class="btn btn-link" type="button" (click)="switchMode()">{{loginMode ? 'Register instead' : 'Login instead'}}</button>
+        </div>
+    </div>
+</form>

@@ -17,12 +17,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
+import { AuthComponent } from './components/pages/auth/auth.component';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
   {path: 'saved-synonyms', component: SavedSynonymsComponent}, 
   {path: 'spellcheck', component: SpellcheckComponent}, 
   {path: '', component: HomeComponent}, 
+  {path: 'auth', component: AuthComponent}, 
 ];
 
 @NgModule({
@@ -35,6 +37,7 @@ const appRoutes : Routes = [
     SavedDefinitionsComponent,
     SavedSynonymsComponent,
     SpellcheckComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,11 +4,11 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators'
 import { WordsApiDefinition } from '../models/WordsApiDefinition.model';
 import { Observable } from 'rxjs';
-import { LinguaDefinitions } from '../models/LinguaDefinition.module';
+import { LinguaDefinitions } from '../models/LinguaDefinition.model';
 import { TwinwordDefinitions } from '../models/TwinwordDefinitions.model';
 import { OwlDefinitions } from '../models/OwlDefinitions.model';
 import { WordsApiSynonyms } from '../models/WordsApiSynonyms.model';
-import { LinguaSynonyms } from '../models/LinguaSynonym.module';
+import { LinguaSynonyms } from '../models/LinguaSynonym.model';
 import { TwinwordSynonyms } from '../models/TwinwordSynonyms.model';
 
 @Injectable({providedIn: 'root'})
