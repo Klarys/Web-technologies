@@ -104,6 +104,18 @@ export class DictionariesService {
             word: word,
             definition: definition
         };
-        return this.http.post(environment.NodeJSUrl + "definitions", body);
+        return this.http.post(environment.NodeJSUrl + "definitions", body,{
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
+    }
+
+    DeleteDefinition(id: number) {
+        return this.http.delete(environment.NodeJSUrl + "definitions/" + id, {
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
     }
 }
