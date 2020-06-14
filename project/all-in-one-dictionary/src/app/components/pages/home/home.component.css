@@ -1,0 +1,14 @@
+.box {
+    /* min-height: 200px;
+    width: 80vw; */
+    margin: 100px auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow:
+    0 2.1px 2.7px rgba(0, 0, 0, 0.025),
+    0 5.2px 6.9px rgba(0, 0, 0, 0.035),
+    0 10.6px 14.2px rgba(0, 0, 0, 0.045),
+    0 21.9px 29.2px rgba(0, 0, 0, 0.055),
+    0 60px 80px rgba(0, 0, 0, 0.08)
+    ;
+}

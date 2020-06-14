@@ -17,7 +17,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthComponent } from './components/pages/auth/auth.component';
+import {MatButtonModule} from '@angular/material/button';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
@@ -49,14 +51,18 @@ const appRoutes : Routes = [
     MatInputModule,
     MatRadioModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   exports: [
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

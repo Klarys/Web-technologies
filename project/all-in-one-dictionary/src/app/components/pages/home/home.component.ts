@@ -15,6 +15,7 @@ import { TwinwordSynonyms } from 'src/app/models/TwinwordSynonyms.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   word: string;
   searchForm: FormGroup;
   searched = false;
+  scrolled = false;
   searchedWord: string;
   category: number =-1;
 
@@ -57,7 +59,22 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.addEventListener('scroll', this.scroll, true);
   }
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scroll, true);
+  }
+
+  scroll = (event): void => {
+    if(window.pageYOffset > 0)
+    {
+      this.scrolled = true;
+    }
+    else
+    {
+      this.scrolled = false;
+    }
+  };
 
   onAccept() { //TODO - OBSLUGA BLEDOW PRZY LOSOWYM CIAGU ZNAKOW (NIEISTNIEJACE SŁOWO)
     if(this.searchForm.valid)
@@ -224,6 +241,19 @@ export class HomeComponent implements OnInit {
     this.synonymsTwinword = [];
     this.synonymsWordsApi = [];
     this.synonymsOwl = [];
+  }
+
+  onScrollUp() {
+    if(window.pageYOffset > 0)
+    {
+      console.log("lele");
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+    
   }
 
 }

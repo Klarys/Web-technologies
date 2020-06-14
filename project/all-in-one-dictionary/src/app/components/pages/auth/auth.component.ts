@@ -76,4 +76,5 @@ export class AuthComponent implements OnInit {
     localStorage.clear();
     window.location.reload();
   }
+
 }
