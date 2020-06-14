@@ -11,6 +11,7 @@ import { WordsApiSynonyms } from '../models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from '../models/LinguaSynonym.model';
 import { TwinwordSynonyms } from '../models/TwinwordSynonyms.model';
 import { SavedDefinition } from '../models/saved/SavedDefinition.model';
+import { SavedSynonym } from '../models/saved/SavedSynonym.model';
 
 @Injectable({providedIn: 'root'})
 export class DictionariesService {
@@ -118,4 +119,35 @@ export class DictionariesService {
             })
         });
     }
+
+
+    GetSavedSynonyms(): Observable<SavedSynonym[]> {
+        return this.http.get<SavedSynonym[]>(environment.NodeJSUrl + "synonyms/", {
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
+    }
+
+    SaveSynonym(word: string, synonym: string) {
+        const body = {
+            word: word,
+            synonym: synonym
+        };
+        return this.http.post(environment.NodeJSUrl + "synonyms/", body,{
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
+    }
+
+    DeleteSynonym(id: number) {
+        return this.http.delete(environment.NodeJSUrl + "synonyms/" + id, {
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        });
+    }
+
+
 }

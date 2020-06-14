@@ -8,7 +8,8 @@ export const environment = {
   WordApiUrl: "https://wordsapiv1.p.rapidapi.com/words/",
   LinguaUrl: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/",
   TwinwordUrl: "https://twinword-word-graph-dictionary.p.rapidapi.com/",
-  OwlUrl: "https://owlbot.info/api/v4/dictionary/"
+  OwlUrl: "https://owlbot.info/api/v4/dictionary/",
+  SpellCheckUrl: "https://montanaflynn-spellcheck.p.rapidapi.com/check/"
 };
 
 /*

@@ -60,6 +60,5 @@ export class SavedDefinitionsComponent implements OnInit {
       (error: HttpErrorResponse) => {console.log("error!");}
       
     );
-
   }
 }

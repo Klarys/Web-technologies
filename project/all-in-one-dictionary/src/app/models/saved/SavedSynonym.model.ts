@@ -1,3 +1,5 @@
 export class SavedSynonym {
-    //synonyms: string[];
+    Id: string;
+    Synonym: string;
+    Word: string;
 }

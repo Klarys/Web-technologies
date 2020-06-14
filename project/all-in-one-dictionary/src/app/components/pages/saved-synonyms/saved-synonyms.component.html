@@ -1,1 +1,29 @@
-<p>saved-synonyms works!</p>
+<div class="row" *ngIf='!logedIn'>
+    <div class="col">
+        <h3>This feature is available only for signed-in users. You can log in <a class="link" routerLink="/auth">here</a></h3>
+    </div>
+</div>
+<div class="row" *ngIf='logedIn'>
+    <div class="col">
+        <div class="row" *ngFor="let synonym of this.synonyms;let i=index">
+            <div class="-lg-2">
+             {{synonym.Word}}:
+            </div>
+            <div class="col">
+             {{synonym.Synonym}}
+            </div>
+            <div class="col-lg-2">
+              <button
+                type="button"
+                class="btn"
+                mat-icon-button
+                (click)="onSynonymDelete(synonym)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

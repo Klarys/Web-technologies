@@ -210,7 +210,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSynonymSave(synonym: string) {
-
+    this.dictionariesService.SaveSynonym(this.searchedWord, synonym).subscribe(
+      );
   }
 
   clearAll() {
