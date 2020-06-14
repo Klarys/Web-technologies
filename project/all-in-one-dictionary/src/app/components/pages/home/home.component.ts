@@ -224,7 +224,9 @@ export class HomeComponent implements OnInit {
   onDefinitionSave(definion: string) {
     this.dictionariesService.SaveDefinition(this.searchedWord, definion).subscribe(
     );
+    
   }
+
 
   onSynonymSave(synonym: string) {
     this.dictionariesService.SaveSynonym(this.searchedWord, synonym).subscribe(

@@ -47,19 +47,20 @@
     <div class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - Lingua Dictionary results:</h3>
-        <div class="row" *ngIf="(this.category == 1 && this.definitionsLingua.length == 0) || (this.category == 2 && this.synonymsLingua.length == 0)">
+        <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsLingua.length == 0) || (this.category == 2 && this.synonymsLingua.length == 0)">
           <div class="col">
             No results. 😞
           </div>
         </div>
         <div class="row" *ngFor="let definition of definitionsLingua;let i=index">
           <div class="col">
-           {{i+1}}. {{definition}}
+           {{i+1}}. {{definition.definition}}
           </div>
           <div class="col-lg-2 text-right"  *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="definition.saved"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
             >
@@ -87,7 +88,7 @@
     <div class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - twinword Dictionary results:</h3>
-        <div class="row" *ngIf="(this.category == 1 && this.definitionsTwinword.length == 0) || (this.category == 2 && this.synonymsTwinword.length == 0)">
+        <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsTwinword.length == 0) || (this.category == 2 && this.synonymsTwinword.length == 0)">
           <div class="col">
             No results. 😞
           </div>
@@ -127,7 +128,7 @@
     <div class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - WordsAPI Dictionary results:</h3>
-        <div class="row" *ngIf="(this.category == 1 && this.definitionsWordsApi.length == 0) || (this.category == 2 && this.synonymsWordsApi.length == 0)">
+        <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsWordsApi.length == 0) || (this.category == 2 && this.synonymsWordsApi.length == 0)">
           <div class="col">
             No results. 😞
           </div>
@@ -167,7 +168,7 @@
     <div class="row box" *ngIf="this.category == 1">
       <div class="col">
         <h3>"{{searchedWord}}" - OWLBOT Dictionary results:</h3>
-        <div class="row" *ngIf="this.definitionsOwl.length == 0">
+        <div class="row text-center" *ngIf="this.definitionsOwl.length == 0">
           <div class="col">
             No results. 😞
           </div>
