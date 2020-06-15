@@ -22,11 +22,13 @@ export class AuthComponent implements OnInit {
 
   authForm: FormGroup;
   loginMode = true;
-  logedIn=false;
+  loggedIn = false;
+  loginError = false;
+  signupError = false;
 
 
   constructor(private authService: AuthService, private router: Router) {
-    this.logedIn = authService.isLoggedIn();
+    this.loggedIn = authService.isLoggedIn();
     this.authForm = new FormGroup({
       emailInput: new FormControl(null, [Validators.required, Validators.email]),
       passwordInput: new FormControl(null, [Validators.required, Validators.minLength(6)])
@@ -41,6 +43,7 @@ export class AuthComponent implements OnInit {
     {
       if(this.loginMode)
       {
+        this.loginError = false;
         this.authService.Login(this.authForm.get('emailInput').value, this.authForm.get('passwordInput').value).subscribe(
           (data: AuthResponse) => {
             localStorage.clear();
@@ -52,17 +55,22 @@ export class AuthComponent implements OnInit {
             this.authService.authorized.next(true);
             this.router.navigate(['']);
           },
-          (data: HttpErrorResponse) => {console.log(data)}
+          (data: HttpErrorResponse) => {
+            this.loginError = true;
+          }
         );
       }
       else
       {
+        this.signupError = false;
         this.authService.Signup(this.authForm.get('emailInput').value, this.authForm.get('passwordInput').value).subscribe(
           (data: AuthResponse) => {
             console.log(data);
             this.loginMode = true;
           },
-          (data: HttpErrorResponse) => {console.log(data)}
+          (data: HttpErrorResponse) => {
+            this.signupError = true;
+          }
         );
       }
     }

@@ -1,4 +1,4 @@
-<div *ngIf='!logedIn'>
+<div *ngIf='!loggedIn'>
   <h3>{{loginMode ? 'Sign-in form:' : 'Sign-up form:'}}</h3>
   <form (ngSubmit)="onAccept()" [formGroup]="authForm">
       <div class="row">
@@ -43,6 +43,16 @@
           <div class="col text-right">
               <button class="btn btn-primary" type="submit">{{loginMode ? 'Login' : 'Register'}}</button>
           </div>
+      </div>
+      <div class="row" *ngIf='loginMode && loginError'>
+        <div class="col text-center text-danger">
+            Something went wrong. Check your email and password and try again.
+        </div>
+      </div>
+      <div class="row" *ngIf='!loginMode && signupError'>
+        <div class="col text-center text-danger">
+            Something went wrong. Please try again later.
+        </div>
       </div>
       <div class="row">
           <div class="col text-left">
