@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DefinitionRow } from 'src/app/models/list/DefinitionRow.model';
 import { SavedDefinition } from 'src/app/models/saved/SavedDefinition.model';
 import { OwlDefinitionRow } from 'src/app/models/list/OwlDefinitonRow.model';
+import { SynonymRow } from 'src/app/models/list/SynonymRow.model';
 
 
 
@@ -46,10 +47,10 @@ export class HomeComponent implements OnInit {
   definitionsWordsApi: DefinitionRow[] = [];
   definitionsOwl: OwlDefinitionRow[] = [];
 
-  synonymsLingua: string[] = [];
-  synonymsTwinword: string[] = [];
-  synonymsWordsApi: string[] = [];
-  synonymsOwl: string[] = [];
+  synonymsLingua: SynonymRow[] = [];
+  synonymsTwinword: SynonymRow[] = [];
+  synonymsWordsApi: SynonymRow[] = [];
+
   
   
 
@@ -177,7 +178,7 @@ export class HomeComponent implements OnInit {
           (data: WordsApiSynonyms) => {
             
             data.synonyms.forEach(element => {
-              this.synonymsWordsApi.push(element);
+              this.synonymsWordsApi.push({synonym: element, saved: false});
             })
           },
           (data: HttpErrorResponse) => {console.log('error!')}
@@ -194,7 +195,7 @@ export class HomeComponent implements OnInit {
                     if(element.synonyms)
                     {
                       element.synonyms.forEach(synonym => {
-                        this.synonymsLingua.push(synonym.toString());
+                        this.synonymsLingua.push({synonym: synonym.toString(), saved: false});
                       });
                     }
                   });
@@ -212,7 +213,7 @@ export class HomeComponent implements OnInit {
             {
               var splitted = data.relation.synonyms.split(", ",1000);
               splitted.forEach(element => {
-                this.synonymsTwinword.push(element);
+                this.synonymsTwinword.push({synonym: element, saved: false});
               })
             }
           }
@@ -233,9 +234,10 @@ export class HomeComponent implements OnInit {
   }
 
 
-  onSynonymSave(synonym: string) {
-    this.dictionariesService.SaveSynonym(this.searchedWord, synonym).subscribe(
+  onSynonymSave(synonym: SynonymRow) {
+    this.dictionariesService.SaveSynonym(this.searchedWord, synonym.synonym).subscribe(
       );
+      synonym.saved = true;
   }
 
   clearAll() {
@@ -247,7 +249,6 @@ export class HomeComponent implements OnInit {
     this.synonymsLingua = [];
     this.synonymsTwinword = [];
     this.synonymsWordsApi = [];
-    this.synonymsOwl = [];
   }
 
   onScrollUp() {

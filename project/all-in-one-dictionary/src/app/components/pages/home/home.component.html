@@ -70,12 +70,13 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsLingua;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym}}
+           {{i+1}}. {{synonym.synonym}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="synonym.saved"
               mat-icon-button
               (click)="onSynonymSave(synonym)"
             >
@@ -111,12 +112,13 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsTwinword;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym}}
+           {{i+1}}. {{synonym.synonym}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="synonym.saved"
               mat-icon-button
               (click)="onSynonymSave(synonym)"
             >
@@ -152,12 +154,13 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsWordsApi;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym}}
+           {{i+1}}. {{synonym.synonym}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="synonym.saved"
               mat-icon-button
               (click)="onSynonymSave(synonym)"
             >
