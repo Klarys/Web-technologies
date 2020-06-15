@@ -1,8 +1,25 @@
 <app-navigation-bar></app-navigation-bar>
-<div class="container-fluid base">
+<div class="container-fluid  base">
   <div class="row">
     <div class="col-md-12">
       <router-outlet></router-outlet>
+      <div class="row float-right" *ngIf='scrolled'>
+        <div class="col">
+          <button 
+            type="button"
+            class="btn"
+            mat-fab 
+            color="dark" 
+            matTooltip="Back to the top!"
+            matTooltipPosition="left"
+            aria-label="Scroll to the top"
+            (click)="onScrollUp()"
+            >
+            <mat-icon>arrow_circle_up</mat-icon>
+          </button>
+            
+        </div>
+      </div>
     </div>
   </div>
 </div>
