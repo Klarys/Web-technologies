@@ -95,12 +95,13 @@
         </div>
         <div class="row" *ngFor="let definition of definitionsTwinword;let i=index">
           <div class="col">
-           {{i+1}}. {{definition}}
+           {{i+1}}. {{definition.definition}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="definition.saved"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
             >
@@ -135,12 +136,13 @@
         </div>
         <div class="row" *ngFor="let definition of definitionsWordsApi;let i=index">
           <div class="col">
-           {{i+1}}. {{definition}}
+           {{i+1}}. {{definition.definition}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="definition.saved"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
             >
@@ -175,12 +177,13 @@
         </div>
         <div class="row" *ngFor="let definition of definitionsOwl;let i=index">
           <div class="col">
-           {{i+1}}. {{definition}}
+           {{i+1}}. {{definition.definition}}
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
               type="button"
               class="btn"
+              [disabled]="definition.saved"
               mat-icon-button
               (click)="onDefinitionSave(definition)"
             >

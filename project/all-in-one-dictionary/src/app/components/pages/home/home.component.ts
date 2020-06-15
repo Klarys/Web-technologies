@@ -13,6 +13,9 @@ import { WordsApiSynonyms } from 'src/app/models/WordsApiSynonyms.model';
 import { LinguaSynonyms } from 'src/app/models/LinguaSynonym.model';
 import { TwinwordSynonyms } from 'src/app/models/TwinwordSynonyms.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { DefinitionRow } from 'src/app/models/list/DefinitionRow.model';
+import { SavedDefinition } from 'src/app/models/saved/SavedDefinition.model';
+import { OwlDefinitionRow } from 'src/app/models/list/OwlDefinitonRow.model';
 
 
 
@@ -38,10 +41,10 @@ export class HomeComponent implements OnInit {
   searchedWord: string;
   category: number =-1;
 
-  definitionsLingua: string[] = [];
-  definitionsTwinword: string[] = [];
-  definitionsWordsApi: string[] = [];
-  definitionsOwl: string[] = [];
+  definitionsLingua: DefinitionRow[];
+  definitionsTwinword: DefinitionRow[] = [];
+  definitionsWordsApi: DefinitionRow[] = [];
+  definitionsOwl: OwlDefinitionRow[] = [];
 
   synonymsLingua: string[] = [];
   synonymsTwinword: string[] = [];
@@ -90,7 +93,7 @@ export class HomeComponent implements OnInit {
         this.dictionariesService.GetWordsAPIDefinitions(this.searchedWord).subscribe(
           (data: WordsApiDefinition) => {
             data.definitions.forEach(element => {
-              this.definitionsWordsApi.push(element.definition);
+              this.definitionsWordsApi.push({definition: element.definition, saved: false});
             })
           },
           (data: HttpErrorResponse) => {console.log('error!')}
@@ -104,7 +107,7 @@ export class HomeComponent implements OnInit {
                 if(lex.senses !== undefined)
                 {
                   lex.senses.forEach(element => {
-                    this.definitionsLingua.push(element.definition);
+                    this.definitionsLingua.push({definition: element.definition, saved: false});
                   })
                 }
               })
@@ -124,7 +127,7 @@ export class HomeComponent implements OnInit {
               var splitted = data.meaning.adjective.split("(adj)",1000);
               splitted.shift();
               splitted.forEach(element => {
-                this.definitionsTwinword.push(element);
+                this.definitionsTwinword.push({definition: element, saved: false});
               })
             }
             if(data.meaning.adverb != "")
@@ -132,7 +135,7 @@ export class HomeComponent implements OnInit {
               var splitted = data.meaning.adverb.split("(adv)",1000);
               splitted.shift();
               splitted.forEach(element => {
-                this.definitionsTwinword.push(element);
+                this.definitionsTwinword.push({definition: element, saved: false});
               })
             }
             if(data.meaning.noun != "")
@@ -140,7 +143,7 @@ export class HomeComponent implements OnInit {
               var splitted = data.meaning.noun.split("(nou)",1000);
               splitted.shift();
               splitted.forEach(element => {
-                this.definitionsTwinword.push(element);
+                this.definitionsTwinword.push({definition: element, saved: false});
               })
             }
             if(data.meaning.verb != "")
@@ -148,7 +151,7 @@ export class HomeComponent implements OnInit {
               var splitted = data.meaning.verb.split("(vrb)",1000);
               splitted.shift();
               splitted.forEach(element => {
-                this.definitionsTwinword.push(element);
+                this.definitionsTwinword.push({definition: element, saved: false});
               })
             }
           },
@@ -158,7 +161,7 @@ export class HomeComponent implements OnInit {
         this.dictionariesService.getOwlDefinitions(this.searchedWord).subscribe(
           (data: OwlDefinitions) => {
             data.definitions.forEach(element => {
-              this.definitionsOwl.push(element.definition);
+              this.definitionsOwl.push({definition: element.definition, imageUrl: element.image_url, saved: false});
             })
           },
           (data: HttpErrorResponse) => {console.log('error!')}
@@ -221,10 +224,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onDefinitionSave(definion: string) {
-    this.dictionariesService.SaveDefinition(this.searchedWord, definion).subscribe(
+
+  onDefinitionSave(definion: DefinitionRow) {
+    console.log(definion.definition);
+    this.dictionariesService.SaveDefinition(this.searchedWord, definion.definition).subscribe(
     );
-    
+    definion.saved = true;
   }
 
 
