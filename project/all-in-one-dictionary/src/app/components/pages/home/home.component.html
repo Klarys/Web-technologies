@@ -192,20 +192,29 @@
         </div>
         <div class="row" *ngFor="let definition of definitionsOwl;let i=index">
           <div class="col">
-           {{i+1}}. {{definition.definition}}
-          </div>
-          <div class="col-lg-2 text-right" *ngIf='logedIn'>
-            <button
-              type="button"
-              class="btn"
-              [disabled]="definition.saved"
-              matTooltip="Save"
-              matTooltipPosition="left"
-              mat-icon-button
-              (click)="onDefinitionSave(definition)"
-            >
-              <mat-icon>bookmark</mat-icon>
-            </button>
+            <div class="row">
+              <div class="col">
+                {{i+1}}. {{definition.definition}}
+               </div>
+               <div class="col-lg-2 text-right" *ngIf='logedIn'>
+                 <button
+                   type="button"
+                   class="btn"
+                   [disabled]="definition.saved"
+                   matTooltip="Save"
+                   matTooltipPosition="left"
+                   mat-icon-button
+                   (click)="onDefinitionSave(definition)"
+                 >
+                   <mat-icon>bookmark</mat-icon>
+                 </button>
+               </div>
+            </div>
+            <div class="row text-center" *ngIf="definition.imageUrl">
+              <div class="col">
+                  <img src={{definition.imageUrl}}/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
