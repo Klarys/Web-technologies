@@ -5,14 +5,14 @@
 </div>
 <div class="row" *ngIf='logedIn'>
     <div class="col">
-        <div class="row" *ngFor="let synonym of this.synonyms;let i=index">
-            <div class="-lg-2">
+        <div class="row single-result align-items-center" *ngFor="let synonym of this.synonyms">
+            <div class="col-xs-2 word">
              {{synonym.Word}}:
             </div>
             <div class="col">
              {{synonym.Synonym}}
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 text-right">
               <button
                 type="button"
                 class="btn"

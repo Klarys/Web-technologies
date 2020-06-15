@@ -112,7 +112,6 @@ export class HomeComponent implements OnInit {
                   })
                 }
               })
-              
             }
           },
           (data: HttpErrorResponse) => {console.log('error!')}
@@ -167,10 +166,6 @@ export class HomeComponent implements OnInit {
           },
           (data: HttpErrorResponse) => {console.log('error!')}
         )
-  
-        console.log(this.definitionsLingua);
-        console.log(this.definitionsWordsApi);
-        console.log(this.definitionsOwl);
       }
       else if(this.category == 2) { //wyszukiwanie synonimów
 
@@ -218,16 +213,12 @@ export class HomeComponent implements OnInit {
             }
           }
         )
-
-        console.log(this.synonymsWordsApi);
-        console.log(this.synonymsLingua);
       }
     }
   }
 
 
   onDefinitionSave(definion: DefinitionRow) {
-    console.log(definion.definition);
     this.dictionariesService.SaveDefinition(this.searchedWord, definion.definition).subscribe(
     );
     definion.saved = true;
@@ -261,7 +252,6 @@ export class HomeComponent implements OnInit {
         behavior: 'smooth'
       });
     }
-    
   }
 
 }

@@ -5,14 +5,14 @@
 </div>
 <div class="row" *ngIf='logedIn'>
     <div class="col">
-        <div class="row" *ngFor="let definition of this.definitions;let i=index">
-            <div class="-lg-2">
+        <div class="row single-result align-items-center" *ngFor="let definition of this.definitions">
+            <div class="col-xs-2 word">
              {{definition.Word}}:
             </div>
             <div class="col">
              {{definition.Definition}}
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 text-right">
               <button
                 type="button"
                 class="btn"

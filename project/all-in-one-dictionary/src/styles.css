@@ -1,9 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css2?family=Amiko&display=swap');
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0;
+    font-family: 'Amiko', sans-serif, sans-serif !important;
+    background-color:#f7f7f5 !important;
+ }
 
 
 mat-form-field {
     width: 100%;
+}
+
+.single-result {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow:
+    0 1.3px 0.5px rgba(0, 0, 0, 0.09),
+    0 3.1px 1.1px rgba(0, 0, 0, 0.031),
+    0 5.8px 2.1px rgba(0, 0, 0, 0.008),
+    0 10.3px 3.8px rgba(0, 0, 0, -0.004),
+    0 19.2px 7.1px rgba(0, 0, 0, -0.009),
+    0 46px 17px rgba(0, 0, 0, -0.008)
+    ;
+}
+
+.single-result:hover {
+    margin-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 10px;
+    box-shadow:
+    0 1.3px 0.5px rgba(0, 0, 0, 0.32),
+    0 3.1px 1.1px rgba(0, 0, 0, 0.111),
+    0 5.8px 2.1px rgba(0, 0, 0, 0.03),
+    0 10.3px 3.8px rgba(0, 0, 0, -0.016),
+    0 19.2px 7.1px rgba(0, 0, 0, -0.034),
+    0 46px 17px rgba(0, 0, 0, -0.028)
+    ;
+}
+
+.word{
+    font-weight: bold;
 }
