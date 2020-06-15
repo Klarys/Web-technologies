@@ -1,19 +1,3 @@
-
-<div *ngIf='logedIn'>
-  <div class="row">
-    <div class="col text-center">
-      <h3>You are already logged in!</h3>
-    </div>
-    
-  </div>
-  <div class="row">
-      <div class="col text-center">
-        <button class="btn btn-primary" type="button" (click)="logOut()">Log out</button>
-      </div>
-  </div>
-  
- 
-</div>
 <div *ngIf='!logedIn'>
   <h3>{{loginMode ? 'Sign-in form:' : 'Sign-up form:'}}</h3>
   <form (ngSubmit)="onAccept()" [formGroup]="authForm">

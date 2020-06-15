@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
       wordInput: new FormControl(null, [Validators.required]),
       category: new FormControl(1, [Validators.required])
     });
-    this.logedIn = authService.isLogedIn();
+    this.logedIn = authService.isLoggedIn();
   }
 
   ngOnInit(): void {

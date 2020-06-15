@@ -26,7 +26,7 @@ export class AuthComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private router: Router) {
-    this.logedIn = authService.isLogedIn();
+    this.logedIn = authService.isLoggedIn();
     this.authForm = new FormGroup({
       emailInput: new FormControl(null, [Validators.required, Validators.email]),
       passwordInput: new FormControl(null, [Validators.required, Validators.minLength(6)])
@@ -47,8 +47,9 @@ export class AuthComponent implements OnInit {
             
             let key = 'token';
             console.log(localStorage.getItem(key));
-            console.log(this.authService.isLogedIn());
+            console.log(this.authService.isLoggedIn());
             localStorage.setItem(key, data.token);
+            this.authService.authorized.next(true);
             this.router.navigate(['']);
           },
           (data: HttpErrorResponse) => {console.log(data)}
@@ -70,11 +71,6 @@ export class AuthComponent implements OnInit {
 
   switchMode() {
    this.loginMode = !this.loginMode;
-  }
-
-  logOut() {
-    localStorage.clear();
-    window.location.reload();
   }
 
 }

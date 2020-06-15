@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthResponse } from '../models/auth/AuthResponse.model';
 import { enableDebugTools } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    
+  public authorized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
+  
     constructor(private http: HttpClient) {}
 
     Login(email: string, password: string): Observable<AuthResponse> {
@@ -26,7 +27,7 @@ export class AuthService {
         return this.http.post<AuthResponse>(environment.NodeJSUrl + "users/signup", body);
     }
 
-    isLogedIn() {
+    isLoggedIn() {
       if(localStorage)
       {
         if(localStorage.getItem('token'))

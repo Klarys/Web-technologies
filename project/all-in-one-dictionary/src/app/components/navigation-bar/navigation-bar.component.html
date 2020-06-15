@@ -7,19 +7,30 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf='loggedIn'>
           <a class="nav-link" routerLink="/saved-definitions">Saved definitions</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf='loggedIn'>
           <a class="nav-link" routerLink="/saved-synonyms">Saved synonyms</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/spellcheck">Spellcheck</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf='!loggedIn'>
           <a class="nav-link" routerLink="/auth">Login/Register</a>
         </li>
-        
       </ul>
     </div>
+    <button
+      type="button"
+      class="btn btn-light"
+      matTooltip="Log-out"
+      matTooltipPosition="left"
+      mat-icon-button
+      (click)="logOut()"
+      *ngIf='loggedIn'
+              
+      >
+        <mat-icon>exit_to_app</mat-icon>
+     </button>
   </nav>

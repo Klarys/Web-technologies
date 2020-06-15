@@ -15,7 +15,7 @@ export class SavedDefinitionsComponent implements OnInit {
   definitions: SavedDefinition[] = [];
 
   constructor(private authService: AuthService, private dictinariesService: DictionariesService) {
-    this.logedIn = authService.isLogedIn();
+    this.logedIn = authService.isLoggedIn();
     if(this.logedIn)
     {
       this.dictinariesService.GetSavedDefinitions().subscribe(

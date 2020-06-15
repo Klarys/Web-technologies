@@ -15,7 +15,7 @@ export class SavedSynonymsComponent implements OnInit {
   synonyms: SavedSynonym[] = [];
 
   constructor(private authService: AuthService, private dictinariesService: DictionariesService) {
-    this.logedIn = authService.isLogedIn();
+    this.logedIn = authService.isLoggedIn();
     if(this.logedIn)
     {
       this.dictinariesService.GetSavedSynonyms().subscribe(
