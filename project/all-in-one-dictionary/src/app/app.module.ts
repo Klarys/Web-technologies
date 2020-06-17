@@ -12,15 +12,16 @@ import { SavedSynonymsComponent } from './components/pages/saved-synonyms/saved-
 import { SpellcheckComponent } from './components/pages/spellcheck/spellcheck.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatIconModule} from '@angular/material/icon';
-import {HttpClientModule} from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthComponent } from './components/pages/auth/auth.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AboutComponent } from './components/pages/about/about.component';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
@@ -28,6 +29,7 @@ const appRoutes : Routes = [
   {path: 'spellcheck', component: SpellcheckComponent}, 
   {path: '', component: HomeComponent}, 
   {path: 'auth', component: AuthComponent}, 
+  {path: 'about', component: AboutComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'}
 ];
@@ -44,6 +46,7 @@ const appRoutes : Routes = [
     SpellcheckComponent,
     AuthComponent,
     NotFoundComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
