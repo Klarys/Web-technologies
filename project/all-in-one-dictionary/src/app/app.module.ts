@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthComponent } from './components/pages/auth/auth.component';
 import {MatButtonModule} from '@angular/material/button';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const appRoutes : Routes = [
   {path: 'saved-definitions', component: SavedDefinitionsComponent}, 
@@ -27,6 +28,8 @@ const appRoutes : Routes = [
   {path: 'spellcheck', component: SpellcheckComponent}, 
   {path: '', component: HomeComponent}, 
   {path: 'auth', component: AuthComponent}, 
+  {path: 'not-found', component: NotFoundComponent},
+  {path: '**', redirectTo: 'not-found'}
 ];
 
 @NgModule({
@@ -40,6 +43,7 @@ const appRoutes : Routes = [
     SavedSynonymsComponent,
     SpellcheckComponent,
     AuthComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
