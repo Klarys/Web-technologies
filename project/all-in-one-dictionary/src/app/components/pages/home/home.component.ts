@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   word: string;
   searchForm: FormGroup;
   searched = false;
+  error: string = "";
 
   searchedWord: string;
   category: number =-1;
@@ -213,16 +214,26 @@ export class HomeComponent implements OnInit {
 
 
   onDefinitionSave(definion: DefinitionRow) {
-    this.dictionariesService.SaveDefinition(this.searchedWord, definion.definition).subscribe(
-    );
     definion.saved = true;
+    this.dictionariesService.SaveDefinition(this.searchedWord, definion.definition).subscribe(
+      (data: any) => {},
+      (error: HttpErrorResponse) => {
+        definion.saved = false;
+        this.error = "We are sorry, we encountered an error while saving the selected synonym. Please try again.";
+      }
+    );
   }
 
 
   onSynonymSave(synonym: SynonymRow) {
+    synonym.saved = true;
     this.dictionariesService.SaveSynonym(this.searchedWord, synonym.synonym).subscribe(
-      );
-      synonym.saved = true;
+      (data: any) => {},
+      (error: HttpErrorResponse) => {
+        synonym.saved = false;
+        this.error = "We are sorry, we encountered an error while saving the selected synonym. Please try again.";
+      }
+    );
   }
 
   clearAll() {
