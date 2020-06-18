@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import {Routes, RouterModule} from '@angular/router';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { SavedDefinitionsComponent } from './components/pages/saved-definitions/saved-definitions.component';
 import { SavedSynonymsComponent } from './components/pages/saved-synonyms/saved-synonyms.component';
@@ -39,7 +38,6 @@ const appRoutes : Routes = [
     AppComponent,
     HeaderComponent,
     NavigationBarComponent,
-    SidebarComponent,
     HomeComponent,
     SavedDefinitionsComponent,
     SavedSynonymsComponent,
