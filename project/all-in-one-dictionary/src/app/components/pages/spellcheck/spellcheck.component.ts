@@ -35,7 +35,6 @@ export class SpellcheckComponent implements OnInit {
   onAccept() {
     if(this.spellcheckForm.valid)
     {
-      console.log(this.spellcheckForm.get('textInput').value);
       this.spellcheckService.CheckText(this.spellcheckForm.get('textInput').value).subscribe(
         (data: SpellcheckResponse) => {
           if(data)

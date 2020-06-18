@@ -13,6 +13,8 @@ export class SavedSynonymsComponent implements OnInit {
 
   logedIn=false;
   synonyms: SavedSynonym[] = [];
+  error: string = "";
+  
 
   constructor(private authService: AuthService, private dictinariesService: DictionariesService) {
     this.logedIn = authService.isLoggedIn();
@@ -20,11 +22,14 @@ export class SavedSynonymsComponent implements OnInit {
     {
       this.dictinariesService.GetSavedSynonyms().subscribe(
         (data: SavedSynonym[]) => {
+          this.error = "";
           if(data)
           {
-            console.log(data);
             this.synonyms = data;
           }
+        },
+        (error: HttpErrorResponse) => {
+          this.error = "We are sorry, we encountered an error while getting your saved synonyms.";
         }
       )
     }
@@ -36,6 +41,7 @@ export class SavedSynonymsComponent implements OnInit {
   onSynonymDelete (synonym: SavedSynonym) {
     this.dictinariesService.DeleteSynonym(parseInt(synonym.Id)).subscribe(
       (data: any) => {
+        this.error = "";
         if(this.synonyms.length == 1)
         {
           this.synonyms.shift();
@@ -57,7 +63,9 @@ export class SavedSynonymsComponent implements OnInit {
         }
         
       },
-      (error: HttpErrorResponse) => {console.log("error!");}
+      (error: HttpErrorResponse) => {
+        this.error = "We are sorry, we encountered an error while deleting the selected synonym. Please try again.";
+      }
       
     );
   }

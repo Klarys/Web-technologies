@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
               this.definitionsWordsApi.push({definition: element.definition, saved: false});
             })
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or WordsAPI didn't respond!")}
         );
   
         this.dictionariesService.GetLinguaDefinitions(this.searchedWord).subscribe(
@@ -105,48 +105,49 @@ export class HomeComponent implements OnInit {
               })
             }
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or Lingua didn't respond!")}
         );
   
   
         this.dictionariesService.getTwinwordDefinitions(this.searchedWord).subscribe(
           (data: TwinwordDefinitions) => {
-            console.log(data);
-            if(data.meaning.adjective != "")
+            if(data.meaning)
             {
-              
-              var splitted = data.meaning.adjective.split("(adj)",1000);
-              splitted.shift();
-              splitted.forEach(element => {
-                this.definitionsTwinword.push({definition: element, saved: false});
-              })
-            }
-            if(data.meaning.adverb != "")
-            {
-              var splitted = data.meaning.adverb.split("(adv)",1000);
-              splitted.shift();
-              splitted.forEach(element => {
-                this.definitionsTwinword.push({definition: element, saved: false});
-              })
-            }
-            if(data.meaning.noun != "")
-            {
-              var splitted = data.meaning.noun.split("(nou)",1000);
-              splitted.shift();
-              splitted.forEach(element => {
-                this.definitionsTwinword.push({definition: element, saved: false});
-              })
-            }
-            if(data.meaning.verb != "")
-            {
-              var splitted = data.meaning.verb.split("(vrb)",1000);
-              splitted.shift();
-              splitted.forEach(element => {
-                this.definitionsTwinword.push({definition: element, saved: false});
-              })
+              if(data.meaning.adjective)
+              {
+                var splitted = data.meaning.adjective.split("(adj)",1000);
+                splitted.shift();
+                splitted.forEach(element => {
+                  this.definitionsTwinword.push({definition: element, saved: false});
+                })
+              }
+              if(data.meaning.adverb)
+              {
+                var splitted = data.meaning.adverb.split("(adv)",1000);
+                splitted.shift();
+                splitted.forEach(element => {
+                  this.definitionsTwinword.push({definition: element, saved: false});
+                })
+              }
+              if(data.meaning.noun)
+              {
+                var splitted = data.meaning.noun.split("(nou)",1000);
+                splitted.shift();
+                splitted.forEach(element => {
+                  this.definitionsTwinword.push({definition: element, saved: false});
+                })
+              }
+              if(data.meaning.verb)
+              {
+                var splitted = data.meaning.verb.split("(vrb)",1000);
+                splitted.shift();
+                splitted.forEach(element => {
+                  this.definitionsTwinword.push({definition: element, saved: false});
+                })
+              }
             }
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or Twinword didn't respond!")}
         );
         
         this.dictionariesService.getOwlDefinitions(this.searchedWord).subscribe(
@@ -155,7 +156,7 @@ export class HomeComponent implements OnInit {
               this.definitionsOwl.push({definition: element.definition, imageUrl: element.image_url, saved: false});
             })
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or OwlDictionary didn't respond!")}
         )
       }
       else if(this.category == 2) { //wyszukiwanie synonimów
@@ -167,7 +168,7 @@ export class HomeComponent implements OnInit {
               this.synonymsWordsApi.push({synonym: element, saved: false});
             })
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or WordsAPI didn't respond!")}
         )
         
         this.dictionariesService.GetLinguaSynonyms(this.searchedWord).subscribe(
@@ -189,18 +190,20 @@ export class HomeComponent implements OnInit {
               });
             }
           },
-          (data: HttpErrorResponse) => {console.log('error!')}
+          (data: HttpErrorResponse) => {console.log("no results or Lingua didn't respond!")}
         );
 
         this.dictionariesService.GetTwinwordSynonyms(this.searchedWord).subscribe( 
           (data: TwinwordSynonyms) => {
-
-            if(data.relation.synonyms != "")
+            if(data.relation)
             {
-              var splitted = data.relation.synonyms.split(", ",1000);
-              splitted.forEach(element => {
-                this.synonymsTwinword.push({synonym: element, saved: false});
-              })
+              if(data.relation.synonyms != "")
+              {
+                var splitted = data.relation.synonyms.split(", ",1000);
+                splitted.forEach(element => {
+                  this.synonymsTwinword.push({synonym: element, saved: false});
+                })
+              }
             }
           }
         )

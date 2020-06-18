@@ -13,6 +13,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class SavedDefinitionsComponent implements OnInit {
   logedIn=false;
   definitions: SavedDefinition[] = [];
+  error: string = "";
 
   constructor(private authService: AuthService, private dictinariesService: DictionariesService) {
     this.logedIn = authService.isLoggedIn();
@@ -20,11 +21,14 @@ export class SavedDefinitionsComponent implements OnInit {
     {
       this.dictinariesService.GetSavedDefinitions().subscribe(
         (data: SavedDefinition[]) => {
+          this.error = "";
           if(data)
           {
-            console.log(data);
             this.definitions = data;
           }
+        },
+        (error: HttpErrorResponse) => {
+          this.error = "We are sorry, we encountered an error while getting your saved definitions.";
         }
       )
     }
@@ -36,6 +40,7 @@ export class SavedDefinitionsComponent implements OnInit {
   onDefinitionDelete (definition: SavedDefinition) {
     this.dictinariesService.DeleteDefinition(parseInt(definition.Id)).subscribe(
       (data: any) => {
+        this.error = "";
         if(this.definitions.length == 1)
         {
           this.definitions.shift();
@@ -57,7 +62,9 @@ export class SavedDefinitionsComponent implements OnInit {
         }
         
       },
-      (error: HttpErrorResponse) => {console.log("error!");}
+      (error: HttpErrorResponse) => {
+        this.error = "We are sorry, we encountered an error while deleting the selected definition. Please try again.";
+      }
       
     );
   }

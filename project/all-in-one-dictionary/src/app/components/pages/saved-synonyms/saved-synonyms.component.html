@@ -3,6 +3,11 @@
         <h3>This feature is available only for signed-in users. You can log in <a class="link" routerLink="/auth">here</a></h3>
     </div>
 </div>
+<div class="row text-danger" *ngIf='logedIn'>
+  <div class="col">
+    {{error}}
+  </div>
+</div>
 <div class="row" *ngIf='logedIn'>
     <div class="col">
         <div class="row single-result align-items-center" *ngFor="let synonym of this.synonyms">

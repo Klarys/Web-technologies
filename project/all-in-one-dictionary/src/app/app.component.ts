@@ -32,7 +32,6 @@ export class AppComponent {
   onScrollUp() {
     if(window.pageYOffset > 0)
     {
-      console.log("lele");
       window.scrollTo({
         top: 0,
         left: 0,

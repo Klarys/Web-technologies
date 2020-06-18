@@ -49,8 +49,6 @@ export class AuthComponent implements OnInit {
             localStorage.clear();
             
             let key = 'token';
-            console.log(localStorage.getItem(key));
-            console.log(this.authService.isLoggedIn());
             localStorage.setItem(key, data.token);
             this.authService.authorized.next(true);
             this.router.navigate(['']);
@@ -65,7 +63,6 @@ export class AuthComponent implements OnInit {
         this.signupError = false;
         this.authService.Signup(this.authForm.get('emailInput').value, this.authForm.get('passwordInput').value).subscribe(
           (data: AuthResponse) => {
-            console.log(data);
             this.loginMode = true;
           },
           (data: HttpErrorResponse) => {
@@ -74,7 +71,6 @@ export class AuthComponent implements OnInit {
         );
       }
     }
-    console.log(this.authForm.get('emailInput'));
   }
 
   switchMode() {
