@@ -25,6 +25,7 @@ export class AuthComponent implements OnInit {
   loggedIn = false;
   loginError = false;
   signupError = false;
+  accountCreated = false;
 
 
   constructor(private authService: AuthService, private router: Router) {
@@ -64,6 +65,7 @@ export class AuthComponent implements OnInit {
         this.authService.Signup(this.authForm.get('emailInput').value, this.authForm.get('passwordInput').value).subscribe(
           (data: AuthResponse) => {
             this.loginMode = true;
+            this.accountCreated = true;
           },
           (data: HttpErrorResponse) => {
             this.signupError = true;

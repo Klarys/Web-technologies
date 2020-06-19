@@ -8,6 +8,11 @@
     {{error}}
   </div>
 </div>
+<div class="row text-center" *ngIf='logedIn && this.definitions.length == 0'>
+  <div class="col">
+    You don't have any definitions saved!
+  </div>
+</div>
 <div class="row" *ngIf='logedIn'>
     <div class="col">
         <div class="row single-result align-items-center" *ngFor="let definition of this.definitions">

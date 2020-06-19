@@ -219,7 +219,7 @@ export class HomeComponent implements OnInit {
       (data: any) => {},
       (error: HttpErrorResponse) => {
         definion.saved = false;
-        this.error = "We are sorry, we encountered an error while saving the selected synonym. Please try again.";
+        this.error = "We are sorry, we encountered an error while saving the selected definition. Please try again.";
       }
     );
   }
