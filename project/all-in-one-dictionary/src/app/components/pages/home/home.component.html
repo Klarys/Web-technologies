@@ -44,22 +44,22 @@
 <hr/>
 <div class="row text-danger">
   <div class="col">
-    {{error}}
+    <p>{{error}}</p>
   </div>
 </div>
-<div class="row" *ngIf="searched">
+<section class="row" *ngIf="searched">
   <div class="col">
-    <div class="row box">
+    <section class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - Lingua Dictionary results:</h3>
         <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsLingua.length == 0) || (this.category == 2 && this.synonymsLingua.length == 0)">
           <div class="col">
-            No results. 😞
+            <p>No results. 😞</p>
           </div>
         </div>
         <div class="row" *ngFor="let definition of definitionsLingua;let i=index">
           <div class="col">
-           {{i+1}}. {{definition.definition}}
+            <p>{{i+1}}. {{definition.definition}}</p>
           </div>
           <div class="col-lg-2 text-right"  *ngIf='logedIn'>
             <button
@@ -77,7 +77,7 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsLingua;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym.synonym}}
+            <p>{{i+1}}. {{synonym.synonym}}</p>
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
@@ -94,18 +94,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row box">
+    </section>
+    <section class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - twinword Dictionary results:</h3>
         <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsTwinword.length == 0) || (this.category == 2 && this.synonymsTwinword.length == 0)">
           <div class="col">
-            No results. 😞
+            <p>No results. 😞</p>
           </div>
         </div>
         <div class="row" *ngFor="let definition of definitionsTwinword;let i=index">
           <div class="col">
-           {{i+1}}. {{definition.definition}}
+            <p>{{i+1}}. {{definition.definition}}</p>
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
@@ -123,7 +123,7 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsTwinword;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym.synonym}}
+            <p>{{i+1}}. {{synonym.synonym}}</p>
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
@@ -140,18 +140,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row box">
+    </section>
+    <section class="row box">
       <div class="col">
         <h3>"{{searchedWord}}" - WordsAPI Dictionary results:</h3>
         <div class="row text-center" *ngIf="(this.category == 1 && this.definitionsWordsApi.length == 0) || (this.category == 2 && this.synonymsWordsApi.length == 0)">
           <div class="col">
-            No results. 😞
+            <p>No results. 😞</p>
           </div>
         </div>
         <div class="row" *ngFor="let definition of definitionsWordsApi;let i=index">
           <div class="col">
-           {{i+1}}. {{definition.definition}}
+            <p>{{i+1}}. {{definition.definition}}</p>
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
@@ -169,7 +169,7 @@
         </div>
         <div class="row" *ngFor="let synonym of synonymsWordsApi;let i=index">
           <div class="col">
-           {{i+1}}. {{synonym.synonym}}
+            <p>{{i+1}}. {{synonym.synonym}}</p>
           </div>
           <div class="col-lg-2 text-right" *ngIf='logedIn'>
             <button
@@ -186,20 +186,20 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row box" *ngIf="this.category == 1">
+    </section>
+    <section class="row box" *ngIf="this.category == 1">
       <div class="col">
         <h3>"{{searchedWord}}" - OWLBOT Dictionary results:</h3>
         <div class="row text-center" *ngIf="this.definitionsOwl.length == 0">
           <div class="col">
-            No results. 😞
+            <p>No results. 😞</p>
           </div>
         </div>
         <div class="row" *ngFor="let definition of definitionsOwl;let i=index">
           <div class="col">
             <div class="row">
               <div class="col">
-                {{i+1}}. {{definition.definition}}
+                <p>{{i+1}}. {{definition.definition}}</p>
                </div>
                <div class="col-lg-2 text-right" *ngIf='logedIn'>
                  <button
@@ -223,8 +223,8 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-</div>
+</section>
 
 

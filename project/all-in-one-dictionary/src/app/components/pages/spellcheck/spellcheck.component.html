@@ -1,27 +1,30 @@
-<form (ngSubmit)="onAccept()" [formGroup]="spellcheckForm">
-    <div class="row">
-        <div class="col">
-            <mat-form-field appearance="standard">
-                <textarea
-                  matInput
-                  formControlName="textInput"
-                  required
-                ></textarea>
-                <mat-error
-                  *ngIf="spellcheckForm.get('textInput').hasError('required')">
-                  Please type in a sentence!
-                </mat-error>
-              </mat-form-field>
+<section>
+    <h2>Spellcheck</h2>
+    <h3>Please enter a sentence or a word (english) to perform a spellcheck.</h3>
+    <form (ngSubmit)="onAccept()" [formGroup]="spellcheckForm">
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="standard">
+                    <textarea
+                    matInput
+                    formControlName="textInput"
+                    required
+                    ></textarea>
+                    <mat-error
+                    *ngIf="spellcheckForm.get('textInput').hasError('required')">
+                    Please type in a sentence!
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col text-right">
-            <button class="btn btn-primary" type="submit">Check!</button>
+        <div class="row">
+            <div class="col text-right">
+                <button class="btn btn-primary" type="submit">Check!</button>
+            </div>
         </div>
-    </div>
-</form>
-
-<div class="row" *ngIf="this.buttonClicked">
+    </form>
+</section>
+<section class="row" *ngIf="this.buttonClicked">
     <div class="col">
         <h3>Corrected text:</h3>
         <div class="row">
@@ -30,4 +33,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

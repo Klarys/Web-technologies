@@ -1,4 +1,4 @@
-<div *ngIf='!loggedIn'>
+<section *ngIf='!loggedIn'>
   <h2>Logged-in users are able to save searched definitions and synonyms!</h2>
   <h3>{{loginMode ? 'Sign-in form:' : 'Sign-up form:'}}</h3>
   <form (ngSubmit)="onAccept()" [formGroup]="authForm">
@@ -67,6 +67,6 @@
           </div>
       </div>
   </form>
-</div>
+</section>
 
 

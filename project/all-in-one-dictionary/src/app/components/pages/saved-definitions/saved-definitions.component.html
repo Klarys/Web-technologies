@@ -1,19 +1,21 @@
-<div class="row" *ngIf='!logedIn'>
+<section>
+  <div class="row" *ngIf='!logedIn'>
+      <div class="col">
+          <h3>This feature is available only for signed-in users. You can log in <a class="link" routerLink="/auth">here</a></h3>
+      </div>
+  </div>
+  <div class="row text-danger" *ngIf='logedIn'>
     <div class="col">
-        <h3>This feature is available only for signed-in users. You can log in <a class="link" routerLink="/auth">here</a></h3>
+      <p>{{error}}</p>
     </div>
-</div>
-<div class="row text-danger" *ngIf='logedIn'>
-  <div class="col">
-    {{error}}
   </div>
-</div>
-<div class="row text-center" *ngIf='logedIn && this.definitions.length == 0'>
-  <div class="col">
-    You don't have any definitions saved!
+  <div class="row text-center" *ngIf='logedIn && this.definitions.length == 0'>
+    <div class="col">
+      <p>You don't have any definitions saved!</p>
+    </div>
   </div>
-</div>
-<div class="row" *ngIf='logedIn'>
+</section>
+<section class="row" *ngIf='logedIn'>
     <div class="col">
         <div class="row single-result align-items-center" *ngFor="let definition of this.definitions">
             <div class="col-xs-2 word">
@@ -34,7 +36,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
 
